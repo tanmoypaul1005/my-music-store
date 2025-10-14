@@ -63,6 +63,14 @@ const PlayerInfo = ({
         <div className={styles.info}>
             <div className={styles.img}>
                 <Image
+                style={{
+                    maxWidth: "60px",
+                    minWidth: "60px",
+                    maxHeight: "60px",
+                    minHeight: "60px",
+                    borderRadius: "4px",
+                    objectFit: "cover",
+                }}
                     src={image}
                     width={60}
                     height={60}
