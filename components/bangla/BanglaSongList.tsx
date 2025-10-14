@@ -35,7 +35,9 @@ const BanglaSongList = () => {
         flex: 1,
         display: "flex",
       }}>Top Bangla song</div>
-      <ul className={styles.list}>
+      <ul style={{
+          marginBottom: "40px",
+      }} className={styles.list}>
         {musics.map((music, index) => (
           <IndexTopChartItem
             key={music.id}
