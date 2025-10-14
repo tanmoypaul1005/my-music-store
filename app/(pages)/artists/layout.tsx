@@ -6,7 +6,7 @@ const ArtistsPageLayout = ({
 } : {
     children: React.ReactNode
 }) => {
-    return <MainCard title="All Artist Musics.">{children}</MainCard>
+    return <MainCard title="">{children}</MainCard>
 }
 
 export default ArtistsPageLayout;
