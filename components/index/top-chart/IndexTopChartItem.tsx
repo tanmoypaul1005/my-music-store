@@ -91,7 +91,7 @@ const IndexTopChartItem = ({
     <li style={{ listStyle: "none" }}>
       {output}
       <div className={`${styles.link} ${preset === "preset2" ? styles.preset2 : ""} ${isDragging ? styles.dragging : ""}`}>
-        <span className={styles.number}>{number}</span>
+        {/* <span className={styles.number}>{number}</span> */}
         <Image
           className={styles.img}
           src={musicData.avatar}
