@@ -61,14 +61,14 @@ const PlayerInfo = ({
 
     return <Dropdown placement='topLeft' menu={{items: playListItems, onClick}}>
         <div className={styles.info}>
-            <div className={styles.img}>
+            <div >
                 <Image
                 style={{
                     maxWidth: "60px",
                     minWidth: "60px",
                     maxHeight: "60px",
                     minHeight: "60px",
-                    borderRadius: "4px",
+                    borderRadius: "100%",
                     objectFit: "cover",
                 }}
                     src={image}
