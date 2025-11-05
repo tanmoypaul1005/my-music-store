@@ -10,8 +10,10 @@ const PLAY_LIST_ID = "top-charts-musics-playlist"
 
 const IndexTopChart = ({
     musics,
+    preset = "default", // Add preset parameter
 } : {
-    musics: Music[]
+    musics: Music[];
+    preset?: "default" | "preset2"; // Add preset type
 }) => {
     const [setMusic, setPlayList, playlistId] = useAppStore(state => [state.setMusic, state.setPlaylist, state.playListId])
 
@@ -28,12 +30,16 @@ const IndexTopChart = ({
             link="/musics"
             text="See all"
         >
-            
-
             <ul className={styles.list}>
             {
                     musics.map((music, index) => (
-                        <IndexTopChartItem key={music.id} musicData={music} index={index+1} onMusicClick={playMusicClickHandler} />
+                        <IndexTopChartItem 
+                            key={music.id} 
+                            musicData={music} 
+                            index={index+1} 
+                            onMusicClick={playMusicClickHandler}
+                            preset={preset} // Pass preset to child component
+                        />
                     ))
                 }
             </ul>

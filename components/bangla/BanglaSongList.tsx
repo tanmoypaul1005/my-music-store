@@ -4,8 +4,10 @@ import React from "react";
 import banglaMusics from "@/server/banglaSong.json";
 import IndexTopChartItem from "../index/top-chart/IndexTopChartItem";
 import styles from "./banglaSong.module.scss";
+import topSong from "@/server/topSong.json";
 
 const BanglaSongList = () => {
+
   const musics = banglaMusics?.music;
 
   const PLAY_LIST_ID = "top-charts-musics-playlist";
@@ -28,18 +30,40 @@ const BanglaSongList = () => {
 
   return (
     <div>
-      <div 
-      className={styles.title}
-      style={{
-        marginBottom: "20px",
-        flex: 1,
-        display: "flex",
-      }}>Top Bangla song</div>
+      <div
+        className={styles.title}
+        style={{
+          marginBottom: "20px",
+          flex: 1,
+          display: "flex",
+        }}>Top Bangla song</div>
       <ul style={{
-          marginBottom: "40px",
+        marginBottom: "40px",
       }} className={styles.list}>
         {musics.map((music, index) => (
           <IndexTopChartItem
+            key={music.id}
+            musicData={music}
+            index={index + 1}
+            onMusicClick={playMusicClickHandler}
+          />
+        ))}
+      </ul>
+
+
+      <div
+        className={styles.title}
+        style={{
+          marginBottom: "20px",
+          flex: 1,
+          display: "flex",
+        }}>Top song</div>
+      <ul style={{
+        marginBottom: "40px",
+      }} className={styles.list}>
+        {topSong?.music.map((music, index) => (
+          <IndexTopChartItem
+          preset="preset2"
             key={music.id}
             musicData={music}
             index={index + 1}

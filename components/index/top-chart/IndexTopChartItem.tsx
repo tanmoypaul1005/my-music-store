@@ -12,11 +12,13 @@ const IndexTopChartItem = ({
   index,
   isDragging,
   onMusicClick,
+  preset = "default", // Add preset parameter with default value
 }: {
   musicData: Music;
   index: number;
   isDragging?: boolean;
   inPlaylist?: boolean;
+  preset?: "default" | "preset2"; // Add preset type
   onMusicClick: (type: "play" | "remove", music: Music) => void;
 }) => {
   const [music, isPlaying, setIsPlaying] = useAppStore((state) => [
@@ -88,7 +90,7 @@ const IndexTopChartItem = ({
   return (
     <li style={{ listStyle: "none" }}>
       {output}
-      <div className={`${styles.link} ${isDragging ? styles.dragging : ""}`}>
+      <div className={`${styles.link} ${preset === "preset2" ? styles.preset2 : ""} ${isDragging ? styles.dragging : ""}`}>
         <span className={styles.number}>{number}</span>
         <Image
           className={styles.img}

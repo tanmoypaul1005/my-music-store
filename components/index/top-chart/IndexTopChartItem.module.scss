@@ -98,4 +98,108 @@
             color: var(--error-color);
         }
     }
+
+    // Preset2 Styles - Modern Card Design
+    &.preset2 {
+        background: linear-gradient(135deg, var(--main-card-background) 0%, rgba(255, 255, 255, 0.05) 100%);
+        padding: 20px;
+        border-radius: 16px;
+        margin-bottom: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .number {
+            background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            min-width: 40px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .img {
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transform: scale(1);
+            transition: all 0.3s ease;
+            
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--title-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+
+        .text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .time {
+            background: rgba(var(--primary-color-rgb), 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .play {
+            background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 50%;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+            
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(var(--primary-color-rgb), 0.4);
+            }
+
+            &.active {
+                background: linear-gradient(135deg, #ff6b6b, var(--primary-color));
+                animation: pulse 2s infinite;
+            }
+        }
+
+        &.dragging {
+            .title {
+                color: #ff6b6b;
+            }
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+    }
+    50% {
+        box-shadow: 0 6px 25px rgba(var(--primary-color-rgb), 0.5);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+    }
 }
