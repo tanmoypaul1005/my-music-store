@@ -18,7 +18,7 @@ const Index = ({
         <IndexTrends trendsInfo={trends} />
         <div className={styles.content}>
 
-            <IndexTopChart musics={topMusics} preset="preset2" />
+            <IndexTopChart musics={topMusics} />
             <IndexArtits artists={topArtists} />
 
         </div>
