@@ -9,15 +9,7 @@
       "avatar": "/images/artist/ed-sheeran.jpeg",
       "playedCount": 12000
     },
-    {
-      "id": 403,
-      "name": "Ed Sheeran - Shape of You",
-      "src": "/musics/topSong/passenger_ let_her_go.mp3",
-      "artist":"Michael David Rosenberg",
-      "coverImage": "/images/artist/michael-david-rosenberg.jpeg",
-      "avatar": "/images/artist/michael-david-rosenberg.jpeg",
-      "playedCount": 12000
-    },
+
     {
       "id": 404,
       "name": "Maroon 5 - Memories",
