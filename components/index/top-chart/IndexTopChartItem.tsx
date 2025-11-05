@@ -116,7 +116,20 @@ const IndexTopChartItem = ({
           >
             <Icon icon={currentMusic && isPlaying ? "pause-fill" : "play"} />
           </button>
-        </>: <span className={styles.time}>Loading ...</span>
+        </> : 
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingWave}>
+              <div className={styles.wave}></div>
+              <div className={styles.wave}></div>
+              <div className={styles.wave}></div>
+            </div>
+            <span className={styles.loadingText}>Loading</span>
+            <div className={styles.loadingDots}>
+              <span className={styles.dot}></span>
+              <span className={styles.dot}></span>
+              <span className={styles.dot}></span>
+            </div>
+          </div>
         }
       </div>
     </li>
