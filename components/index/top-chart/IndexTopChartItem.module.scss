@@ -102,9 +102,9 @@
     // Preset2 Styles - Modern Card Design
     &.preset2 {
         background: linear-gradient(135deg, var(--main-card-background) 0%, rgba(255, 255, 255, 0.05) 100%);
-        padding: 12px;
+        padding: 8px;
         border-radius: 16px;
-        margin-bottom: 12px;
+
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -155,10 +155,10 @@
         }
 
         .time {
-            background: rgba(var(--primary-color-rgb), 0.1);
-            padding: 6px 12px;
+            // background: rgba(var(--primary-color-rgb), 0.1);
+            padding: 0px 0px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--primary-color);
             margin-right: 12px;
@@ -189,6 +189,137 @@
                 color: #ff6b6b;
             }
         }
+    }
+
+    // Loading Animation Styles
+    .loadingContainer {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-left: auto;
+        padding: 8px 16px;
+        background: linear-gradient(45deg, rgba(var(--primary-color-rgb), 0.1), rgba(var(--primary-color-rgb), 0.05));
+        border-radius: 20px;
+        border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+    }
+
+    .loadingWave {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        
+        .wave {
+            width: 3px;
+            height: 16px;
+            background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+            border-radius: 2px;
+            animation: waveAnimation 1.2s ease-in-out infinite;
+            
+            &:nth-child(1) {
+                animation-delay: 0s;
+            }
+            
+            &:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            
+            &:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+        }
+    }
+
+    .loadingText {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--primary-color);
+        animation: textPulse 2s ease-in-out infinite;
+    }
+
+    .loadingDots {
+        display: flex;
+        gap: 4px;
+        
+        .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: dotBounce 1.4s ease-in-out infinite;
+            
+            &:nth-child(1) {
+                animation-delay: 0s;
+            }
+            
+            &:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            
+            &:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+        }
+    }
+
+    // Preset2 Loading Styles
+    &.preset2 {
+        .loadingContainer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .loadingWave .wave {
+            background: linear-gradient(135deg, #ff6b6b, var(--primary-color));
+            box-shadow: 0 2px 8px rgba(var(--primary-color-rgb), 0.3);
+        }
+
+        .loadingText {
+            background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .loadingDots .dot {
+            background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+            box-shadow: 0 2px 6px rgba(var(--primary-color-rgb), 0.4);
+        }
+    }
+}
+
+// Loading Animations
+@keyframes waveAnimation {
+    0%, 100% {
+        height: 16px;
+        transform: scaleY(1);
+    }
+    50% {
+        height: 24px;
+        transform: scaleY(1.5);
+    }
+}
+
+@keyframes textPulse {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes dotBounce {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-6px);
+        opacity: 1;
     }
 }
 
