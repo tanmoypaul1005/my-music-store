@@ -38,6 +38,15 @@
       "playedCount": 12000
     },
     {
+      "id": 10244,
+      "name": "Ga-Chuye-Bolo",
+      "src": "/musics/bangla/Ga-Chuye-Bolo.mp3",
+      "artist": "Jayati Chakraborty",
+      "coverImage": "/images/artist/Ga-Chuye-Bolo.jpg",
+      "avatar": "/images/artist/Ga-Chuye-Bolo.jpg",
+      "playedCount": 12000
+    },
+    {
       "id": 103,
       "name": "OREY NEEL DORIYA",
       "src": "/musics/bangla/orey-neel-doriya.mp3",
