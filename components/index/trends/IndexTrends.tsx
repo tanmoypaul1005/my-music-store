@@ -20,6 +20,15 @@ const IndexTrends = ({
 
     const trendsInfo = [
         {
+            "id": 119,
+            "name": "Bulbuli",
+            "src": "/musics/bangla/bulbuli.mp3",
+            "artist": "Ritu Raj & Nandita",
+            "coverImage": "/images/music/bulbuili.png",
+            "avatar": "/images/music/without-me.webp",
+            "playedCount": 63000000
+        },
+        {
             "id": 120,
             "name": "LEVEL FIVE - TUMI",
             "src": "/musics/bangla/LEVEL FIVE - TUMI.mp3",
