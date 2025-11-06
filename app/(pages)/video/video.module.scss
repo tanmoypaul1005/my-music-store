@@ -1,0 +1,491 @@
+.videoPage {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: var(--main-background);
+    padding: 20px;
+
+    .mainContent {
+        display: flex;
+        gap: 24px;
+        max-width: 1800px;
+        margin: 0 auto;
+
+        @media (max-width: 1024px) {
+            flex-direction: column;
+        }
+    }
+
+    .playerContainer {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .playerWrapper {
+        position: relative;
+        padding-top: 56.25%; // 16:9 aspect ratio
+        background: #000;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+        .reactPlayer {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .controlsOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0) 60%,
+                rgba(0, 0, 0, 0.8) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+
+            &.show,
+            &:hover {
+                opacity: 1;
+            }
+
+            .controls {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 20px;
+            }
+
+            .progressContainer {
+                margin-bottom: 15px;
+
+                .progressBar {
+                    width: 100%;
+                    height: 5px;
+                    -webkit-appearance: none;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 5px;
+                    outline: none;
+                    cursor: pointer;
+                    transition: height 0.2s ease;
+
+                    &:hover {
+                        height: 8px;
+                    }
+
+                    &::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        width: 15px;
+                        height: 15px;
+                        background: var(--primary-color);
+                        border-radius: 50%;
+                        cursor: pointer;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                        transition: transform 0.2s ease;
+
+                        &:hover {
+                            transform: scale(1.2);
+                        }
+                    }
+
+                    &::-webkit-slider-runnable-track {
+                        background: linear-gradient(
+                            to right,
+                            var(--primary-color) 0%,
+                            var(--primary-color) var(--value, 0%),
+                            rgba(255, 255, 255, 0.3) var(--value, 0%),
+                            rgba(255, 255, 255, 0.3) 100%
+                        );
+                    }
+                }
+            }
+
+            .controlButtons {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .leftControls,
+            .rightControls {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .playButton,
+            .volumeButton,
+            .controlBtn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                    transform: scale(1.1);
+                }
+            }
+
+            .volumeControl {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .volumeSlider {
+                    width: 80px;
+                    height: 4px;
+                    -webkit-appearance: none;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 5px;
+                    outline: none;
+                    cursor: pointer;
+
+                    &::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        width: 12px;
+                        height: 12px;
+                        background: white;
+                        border-radius: 50%;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .time {
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .videoInfo {
+        margin-top: 20px;
+        padding: 20px;
+        background: var(--main-card-background);
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+        .videoTitle {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--title-color);
+            margin: 0 0 15px 0;
+            line-height: 1.4;
+        }
+
+        .videoMeta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+
+            @media (max-width: 768px) {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+
+        .channelInfo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .channelAvatar {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+            }
+
+            .channelDetails {
+                .channelName {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: var(--title-color);
+                    margin: 0 0 4px 0;
+                }
+
+                .views {
+                    font-size: 13px;
+                    color: var(--text-color);
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+
+            @media (max-width: 768px) {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .actionBtn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 20px;
+                background: var(--card-background);
+                border: 1px solid var(--border-color);
+                border-radius: 20px;
+                color: var(--title-color);
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: var(--primary-color);
+                    color: white;
+                    border-color: var(--primary-color);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.3);
+                }
+
+                i {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        .description {
+            p {
+                font-size: 14px;
+                color: var(--text-color);
+                line-height: 1.6;
+                margin: 0;
+            }
+        }
+    }
+
+    .sidebar {
+        width: 400px;
+        flex-shrink: 0;
+
+        @media (max-width: 1024px) {
+            width: 100%;
+        }
+
+        .sidebarHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: var(--main-card-background);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+            .sidebarTitle {
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--title-color);
+                margin: 0;
+            }
+
+            .autoplayToggle {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: var(--text-color);
+                font-size: 14px;
+                font-weight: 600;
+
+                .toggle {
+                    position: relative;
+                    width: 44px;
+                    height: 24px;
+
+                    input[type="checkbox"] {
+                        display: none;
+
+                        &:checked + label {
+                            background: var(--primary-color);
+
+                            &:after {
+                                transform: translateX(20px);
+                            }
+                        }
+                    }
+
+                    label {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: var(--border-color);
+                        border-radius: 12px;
+                        cursor: pointer;
+                        transition: background 0.3s ease;
+
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            top: 2px;
+                            left: 2px;
+                            width: 20px;
+                            height: 20px;
+                            background: white;
+                            border-radius: 50%;
+                            transition: transform 0.3s ease;
+                        }
+                    }
+                }
+            }
+        }
+
+        .videoList {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .videoCard {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: var(--main-card-background);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            &:hover {
+                transform: translateX(-4px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+                background: linear-gradient(135deg, var(--card-background), var(--main-card-background));
+
+                .thumbnailContainer {
+                    .thumbnail {
+                        transform: scale(1.05);
+                    }
+                }
+
+                .videoCardTitle {
+                    color: var(--primary-color);
+                }
+            }
+
+            .thumbnailContainer {
+                position: relative;
+                width: 168px;
+                height: 94px;
+                flex-shrink: 0;
+                border-radius: 8px;
+                overflow: hidden;
+                background: #000;
+
+                .thumbnail {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.3s ease;
+                }
+
+                .videoDuration {
+                    position: absolute;
+                    bottom: 6px;
+                    right: 6px;
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+
+            .videoDetails {
+                flex: 1;
+                min-width: 0;
+
+                .videoCardTitle {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: var(--title-color);
+                    margin: 0 0 6px 0;
+                    line-height: 1.4;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    transition: color 0.3s ease;
+                }
+
+                .videoCardArtist {
+                    font-size: 13px;
+                    color: var(--text-color);
+                    margin: 0 0 4px 0;
+                    opacity: 0.8;
+                }
+
+                .videoCardMeta {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    font-size: 12px;
+                    color: var(--text-color);
+                    opacity: 0.7;
+
+                    span {
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.videoCard {
+    animation: fadeIn 0.3s ease forwards;
+    
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.05}s;
+        }
+    }
+}
