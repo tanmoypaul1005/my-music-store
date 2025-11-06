@@ -33,7 +33,7 @@ const IndexTrends = ({
             "name": "LEVEL FIVE - TUMI",
             "src": "/musics/bangla/LEVEL FIVE - TUMI.mp3",
             "artist": "Jayati Chakraborty",
-            "coverImage": "/images/music/cover.webp",
+            "coverImage": "https://i.ytimg.com/vi/NQp3cbSkqbo/hqdefault.jpg",
             "avatar": "/images/music/without-me.webp",
             "playedCount": 63000000
         },
