@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
-import Image from 'next/image';
 import Icon from '@/components/ui/Icon';
 import styles from './video.module.scss';
 
@@ -145,20 +144,19 @@ const Video = () => {
     const suggestedVideos = videoData.filter(video => video.id !== currentVideo.id);
 
     return (
-        <div className={styles.videoPage}>
-            
+        <div className={styles.videoPage}>  
             <div className={styles.mainContent}>
                 <div className={styles.playerContainer}>
                     <div className={styles.playerWrapper}>
                         <ReactPlayer
                             key={currentVideo.id}
                             ref={playerRef}
-                            url={currentVideo.url}
+                            src={currentVideo.url}
                             playing={playing}
                             volume={volume}
                             muted={muted}
                             onProgress={handleProgress as any}
-                            onDuration={handleDuration}
+                            // onDuration={handleDuration}
                             width="100%"
                             height="100%"
                             className={styles.reactPlayer}
