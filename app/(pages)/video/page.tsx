@@ -154,7 +154,7 @@ const Video = () => {
                                         alt={video.title}
                                         className={styles.thumbnail}
                                     />
-                                    <span className={styles.videoDuration}>{video.duration}</span>
+                                    {/* <span className={styles.videoDuration}>{video.duration}</span> */}
                                 </div>
                                 <div className={styles.videoDetails}>
                                     <h3 className={styles.videoCardTitle}>{video.title}</h3>
