@@ -61,5 +61,6 @@ export const iconsName = [
     "forward",
     "forward-fill",
     "maximize",
+    "video",
     "cloud-download"
 ] as const ;
