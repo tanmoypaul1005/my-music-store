@@ -156,7 +156,7 @@ const Video = () => {
                             volume={volume}
                             muted={muted}
                             onProgress={handleProgress as any}
-                            // onDuration={handleDuration}
+                            onDuration={handleDuration}
                             width="100%"
                             height="100%"
                             className={styles.reactPlayer}
