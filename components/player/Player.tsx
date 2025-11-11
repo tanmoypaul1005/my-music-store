@@ -10,8 +10,6 @@ const Player = () => {
 
     const pathName = usePathname();
 
-    console.log("pathName", pathName);
-
     const music = useAppStore(state => state.currentMusic)
 
     return <>
