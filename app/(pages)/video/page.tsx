@@ -12,7 +12,6 @@ const videoData = [
         artist: "The Weeknd",
         thumbnail: "https://img.youtube.com/vi/LXb3EKWsInQ/maxresdefault.jpg",
         url: "https://www.youtube.com/watch?v=LXb3EKWsInQ",
-        duration: "3:45",
         views: "1.2M",
         uploadDate: "2 days ago",
         description: "Official music video for the latest hit single from The Weeknd"
@@ -23,7 +22,6 @@ const videoData = [
         artist: "The Weeknd",
         thumbnail: "https://img.youtube.com/vi/4NRXx6U8ABQ/maxresdefault.jpg",
         url: "https://www.youtube.com/watch?v=4NRXx6U8ABQ",
-        duration: "4:20",
         views: "2.5M",
         uploadDate: "1 week ago",
         description: "The iconic 80s-inspired hit from After Hours album"
@@ -34,7 +32,6 @@ const videoData = [
         artist: "The Weeknd",
         thumbnail: "https://img.youtube.com/vi/XXYlFuWEuKI/maxresdefault.jpg",
         url: "https://www.youtube.com/watch?v=XXYlFuWEuKI",
-        duration: "3:35",
         views: "3.1M",
         uploadDate: "2 weeks ago",
         description: "Save Your Tears official music video"
@@ -45,7 +42,6 @@ const videoData = [
         artist: "The Weeknd ft. Daft Punk",
         thumbnail: "https://img.youtube.com/vi/34Na4j8AVgA/maxresdefault.jpg",
         url: "https://www.youtube.com/watch?v=34Na4j8AVgA",
-        duration: "3:50",
         views: "4.2M",
         uploadDate: "1 month ago",
         description: "Starboy featuring Daft Punk from the album Starboy"
@@ -56,7 +52,6 @@ const videoData = [
         artist: "The Weeknd",
         thumbnail: "https://img.youtube.com/vi/qFLhGq0060w/maxresdefault.jpg",
         url: "https://www.youtube.com/watch?v=qFLhGq0060w",
-        duration: "4:18",
         views: "1.8M",
         uploadDate: "3 days ago",
         description: "Die For You - A heartfelt ballad from The Weeknd"
@@ -67,7 +62,6 @@ const videoData = [
         artist: "The Weeknd ft. Daft Punk",
         thumbnail: "https://img.youtube.com/vi/qFLhGq0060w/maxresdefault.jpg",
         url: "https://www.youtube.com/watch?v=qFLhGq0060w",
-        duration: "4:29",
         views: "2.9M",
         uploadDate: "5 days ago",
         description: "I Feel It Coming - Collaboration with Daft Punk"
@@ -145,6 +139,7 @@ const Video = () => {
 
     return (
         <div className={styles.videoPage}>  
+        
             <div className={styles.mainContent}>
                 <div className={styles.playerContainer}>
                     <div className={styles.playerWrapper}>
