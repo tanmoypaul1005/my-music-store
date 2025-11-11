@@ -30,9 +30,28 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 
         .reactPlayer {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            
+            > div {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+            
+            iframe {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                border: none !important;
+            }
         }
 
         .controlsOverlay {
@@ -47,9 +66,11 @@
                 rgba(0, 0, 0, 0) 60%,
                 rgba(0, 0, 0, 0.8) 100%
             );
-            opacity: 0;
+            opacity: 1; // Always visible
             transition: opacity 0.3s ease;
             cursor: pointer;
+            pointer-events: auto; // Enable interactions
+            z-index: 10;
 
             &.show,
             &:hover {
@@ -62,15 +83,20 @@
                 left: 0;
                 right: 0;
                 padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                pointer-events: auto; // Ensure controls are clickable
             }
 
             .progressContainer {
-                margin-bottom: 15px;
+                margin-bottom: 0;
+                width: 100%;
 
                 .progressBar {
                     width: 100%;
                     height: 5px;
-                    -webkit-appearance: none;
+                    appearance: none;
                     background: rgba(255, 255, 255, 0.3);
                     border-radius: 5px;
                     outline: none;
@@ -82,7 +108,7 @@
                     }
 
                     &::-webkit-slider-thumb {
-                        -webkit-appearance: none;
+                        appearance: none;
                         width: 15px;
                         height: 15px;
                         background: var(--primary-color);
@@ -96,14 +122,26 @@
                         }
                     }
 
+                    &::-moz-range-thumb {
+                        width: 15px;
+                        height: 15px;
+                        background: var(--primary-color);
+                        border-radius: 50%;
+                        cursor: pointer;
+                        border: none;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                    }
+
                     &::-webkit-slider-runnable-track {
-                        background: linear-gradient(
-                            to right,
-                            var(--primary-color) 0%,
-                            var(--primary-color) var(--value, 0%),
-                            rgba(255, 255, 255, 0.3) var(--value, 0%),
-                            rgba(255, 255, 255, 0.3) 100%
-                        );
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 5px;
+                        height: 5px;
+                    }
+
+                    &::-moz-range-track {
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 5px;
+                        height: 5px;
                     }
                 }
             }
@@ -112,6 +150,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                pointer-events: auto;
             }
 
             .leftControls,
@@ -135,6 +174,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                pointer-events: auto;
 
                 &:hover {
                     background: rgba(255, 255, 255, 0.2);
@@ -146,23 +186,33 @@
                 display: flex;
                 align-items: center;
                 gap: 10px;
+                pointer-events: auto;
 
                 .volumeSlider {
                     width: 80px;
                     height: 4px;
-                    -webkit-appearance: none;
+                    appearance: none;
                     background: rgba(255, 255, 255, 0.3);
                     border-radius: 5px;
                     outline: none;
                     cursor: pointer;
 
                     &::-webkit-slider-thumb {
-                        -webkit-appearance: none;
+                        appearance: none;
                         width: 12px;
                         height: 12px;
                         background: white;
                         border-radius: 50%;
                         cursor: pointer;
+                    }
+
+                    &::-moz-range-thumb {
+                        width: 12px;
+                        height: 12px;
+                        background: white;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        border: none;
                     }
                 }
             }

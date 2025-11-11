@@ -69,71 +69,13 @@ const videoData = [
 ];
 
 const Video = () => {
+    
     const [currentVideo, setCurrentVideo] = useState(videoData[0]);
-    const [playing, setPlaying] = useState(false);
-    const [volume, setVolume] = useState(0.8);
-    const [muted, setMuted] = useState(false);
-    const [played, setPlayed] = useState(0);
-    const [duration, setDuration] = useState(0);
-    const [seeking, setSeeking] = useState(false);
-    const [showControls, setShowControls] = useState(true);
-    const playerRef = useRef<any>(null);
 
     const handleVideoSelect = (video: typeof videoData[0]) => {
         setCurrentVideo(video);
-        setPlaying(true);
-        setPlayed(0);
     };
 
-    const handlePlayPause = () => {
-        setPlaying(!playing);
-    };
-
-    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setVolume(parseFloat(e.target.value));
-        setMuted(false);
-    };
-
-    const handleToggleMute = () => {
-        setMuted(!muted);
-    };
-
-    const handleProgress = (state: { played: number; playedSeconds: number }) => {
-        if (!seeking) {
-            setPlayed(state.played);
-        }
-    };
-
-    const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPlayed(parseFloat(e.target.value));
-    };
-
-    const handleSeekMouseDown = () => {
-        setSeeking(true);
-    };
-
-    const handleSeekMouseUp = (e: React.MouseEvent<HTMLInputElement>) => {
-        setSeeking(false);
-        const target = e.target as HTMLInputElement;
-        const seekValue = parseFloat(target.value);
-        if (playerRef.current && typeof playerRef.current.seekTo === 'function') {
-            playerRef.current.seekTo(seekValue);
-        }
-    };
-
-    const handleDuration = (duration: number) => {
-        setDuration(duration);
-    };
-
-    const formatTime = (seconds: number) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    };
-
-    const handleClickPlayer = () => {
-        setPlaying(!playing);
-    };
 
     const suggestedVideos = videoData.filter(video => video.id !== currentVideo.id);
 
@@ -145,86 +87,11 @@ const Video = () => {
                     <div className={styles.playerWrapper}>
                         <ReactPlayer
                             key={currentVideo.id}
-                            ref={playerRef}
                             src={currentVideo.url}
-                            playing={playing}
-                            volume={volume}
-                            muted={muted}
-                            onProgress={handleProgress as any}
-                            onDuration={handleDuration}
                             width="100%"
                             height="100%"
                             className={styles.reactPlayer}
-                            controls={false}
-                           
                         />
-                        
-                        {/* Custom Controls Overlay */}
-                        <div 
-                            className={`${styles.controlsOverlay} ${showControls ? styles.show : ''}`}
-                            onMouseEnter={() => setShowControls(true)}
-                            onMouseLeave={() => setShowControls(false)}
-                            onClick={(e) => {
-                                // Only toggle play if clicking on the video area, not controls
-                                if (e.target === e.currentTarget) {
-                                    handleClickPlayer();
-                                }
-                            }}
-                        >
-                            <div className={styles.controls} onClick={(e) => e.stopPropagation()}>
-                                {/* Progress Bar */}
-                                <div className={styles.progressContainer}>
-                                    <input
-                                        type="range"
-                                        min={0}
-                                        max={0.999999}
-                                        step="any"
-                                        value={played}
-                                        onMouseDown={handleSeekMouseDown}
-                                        onChange={handleSeekChange}
-                                        onMouseUp={handleSeekMouseUp}
-                                        className={styles.progressBar}
-                                    />
-                                </div>
-
-                                {/* Control Buttons */}
-                                <div className={styles.controlButtons}>
-                                    <div className={styles.leftControls}>
-                                        <button onClick={handlePlayPause} className={styles.playButton}>
-                                            <Icon icon={playing ? 'pause-fill' : 'play'} />
-                                        </button>
-
-                                        <div className={styles.volumeControl}>
-                                            <button onClick={handleToggleMute} className={styles.volumeButton}>
-                                                <Icon icon={muted || volume === 0 ? 'volume' : 'volume'} />
-                                            </button>
-                                            <input
-                                                type="range"
-                                                min={0}
-                                                max={1}
-                                                step={0.01}
-                                                value={muted ? 0 : volume}
-                                                onChange={handleVolumeChange}
-                                                className={styles.volumeSlider}
-                                            />
-                                        </div>
-
-                                        <span className={styles.time}>
-                                            {formatTime(played * duration)} / {formatTime(duration)}
-                                        </span>
-                                    </div>
-
-                                    <div className={styles.rightControls}>
-                                        <button className={styles.controlBtn}>
-                                            <Icon icon="setting" />
-                                        </button>
-                                        <button className={styles.controlBtn}>
-                                            <Icon icon="maximize" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Video Info */}
@@ -240,7 +107,7 @@ const Video = () => {
                                     <span className={styles.views}>{currentVideo.views} views • {currentVideo.uploadDate}</span>
                                 </div>
                             </div>
-                            <div className={styles.actions}>
+                            {/* <div className={styles.actions}>
                                 <button className={styles.actionBtn}>
                                     <Icon icon="heart" />
                                     <span>Like</span>
@@ -253,7 +120,7 @@ const Video = () => {
                                     <Icon icon="cloud-download" />
                                     <span>Download</span>
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                         <div className={styles.description}>
                             <p>{currentVideo.description}</p>
