@@ -65,15 +65,26 @@
   --card-shadow: #{$light-card-shadow};
 }
 
+// :where(.css-dev-only-do-not-override-1g3iul2).ant-slider .ant-slider-rail {
+//   position: absolute;
+//   background-color: #646867; /* Normal state */
+//   border-radius: 2px;
+//   transition: background-color 0.2s;
+// }
+
+// :where(.css-dev-only-do-not-override-1g3iul2).ant-slider:hover .ant-slider-rail {
+//   background-color:  #646867;
+// }
+
 :where(.css-dev-only-do-not-override-1g3iul2).ant-slider .ant-slider-rail {
-  position: absolute;
-  background-color: #646867; /* Normal state */
-  border-radius: 2px;
-  transition: background-color 0.2s;
+  position: absolute !important;
+  background-color: #646867 !important; /* Normal state */
+  border-radius: 2px !important;
+  transition: background-color 0.2s !important;
 }
 
 :where(.css-dev-only-do-not-override-1g3iul2).ant-slider:hover .ant-slider-rail {
-  background-color:  #646867;
+  background-color: #646867 !important; /* Same as normal state */
 }
 
 :has(main.dark):root {
