@@ -11,7 +11,7 @@ import styles from './PlayerControl.module.scss'
 
 const PlayerControl = ({
     music,
-} : {
+}: {
     music: Music | null,
 }) => {
     const [currentTime, setCurrentTime, isPlaying, setIsPlaying, volume, setVolume, changeMusic, repeatType, setRepeat, disableKeydown] = useAppStore(state => [state.currentMusicTime, state.setCurrentMusicTime, state.isPlaying, state.setPlayingState, state.volume, state.setVolume, state.changeMusic, state.repeatType, state.setRepeatType, state.disableKeyDown])
@@ -26,12 +26,12 @@ const PlayerControl = ({
         setVolume(volumeValue)
     }
 
-    const menuItems : MenuProps['items'] = [
+    const menuItems: MenuProps['items'] = [
         {
             key: "1",
             label: (
-                <div style={{height: "150px", padding: "10px 0"}}>
-                    <Slider vertical min={0} defaultValue={volume} max={1} tipFormatter={(value) => `${value*100}`} step={0.05} onChange={changeVolumeHandler} />
+                <div style={{ height: "150px", padding: "10px 0" }}>
+                    <Slider vertical min={0} defaultValue={volume} max={1} tipFormatter={(value) => `${value * 100}`} step={0.05} onChange={changeVolumeHandler} />
                 </div>
             )
         }
@@ -41,61 +41,61 @@ const PlayerControl = ({
 
     useEffect(() => {
         const handler = (e: KeyboardEventInit) => {
-            const keyPressedCode : string = e.code ? e.code.toLowerCase() : ""
+            const keyPressedCode: string = e.code ? e.code.toLowerCase() : ""
 
             const event = e as any;
-            if ( !["f5", "keyr", "keyj"].includes(keyPressedCode) ) event.preventDefault();
+            if (!["f5", "keyr", "keyj"].includes(keyPressedCode)) event.preventDefault();
 
-            if ( keyPressedCode === "space" ) {
-                if ( isPlaying ) {
+            if (keyPressedCode === "space") {
+                if (isPlaying) {
                     setIsPlaying(false)
                 } else {
                     setIsPlaying(true)
                 }
-            } else if ( keyPressedCode === "arrowleft" ) {
+            } else if (keyPressedCode === "arrowleft") {
                 const newCurrentTime = currentTime - 5
 
-                if ( newCurrentTime < 0 ) {
+                if (newCurrentTime < 0) {
                     changeMusic("prev")
                 } else {
                     ref.current.currentTime = newCurrentTime
                     setCurrentTime(newCurrentTime)
                 }
-            } else if ( keyPressedCode === "arrowright" ) {
+            } else if (keyPressedCode === "arrowright") {
                 const newCurrentTime = currentTime + 5
 
-                if ( newCurrentTime > duration ) {
+                if (newCurrentTime > duration) {
                     changeMusic("next", true)
                 } else {
                     ref.current.currentTime = newCurrentTime
                     setCurrentTime(newCurrentTime)
                 }
-            } else if ( keyPressedCode === "arrowup" ) {
+            } else if (keyPressedCode === "arrowup") {
                 const newVal = volume + 0.2 > 1 ? 1 : volume + 0.2
                 ref.current.volume = newVal
                 setVolume(newVal)
-            } else if ( keyPressedCode === "arrowdown" ) {
+            } else if (keyPressedCode === "arrowdown") {
                 const newVal = volume - 0.2 < 0 ? 0 : volume - 0.2
                 ref.current.volume = newVal
                 setVolume(newVal)
             }
-        } 
+        }
 
-        if ( !disableKeydown ) {
+        if (!disableKeydown) {
             document.addEventListener("keydown", handler)
         }
 
-        return() => {
+        return () => {
             document.removeEventListener("keydown", handler)
         }
     }, [isPlaying, currentTime, volume, disableKeydown])
 
     useEffect(() => {
-        if ( music ) {
+        if (music) {
             ref.current.src = music.src;
             ref.current.currentTime = currentTime
             ref.current.volume = volume;
-            if ( !isPlaying ) {
+            if (!isPlaying) {
                 ref.current.pause();
             } else {
                 ref.current.play();
@@ -104,13 +104,13 @@ const PlayerControl = ({
     }, [music, isPlaying]);
 
     const musicTimeUpdateHandler = () => {
-        if ( ref?.current?.currentTime === duration ) changeMusic("next", true)
-        else setCurrentTime(ref.current.currentTime) 
+        if (ref?.current?.currentTime === duration) changeMusic("next", true)
+        else setCurrentTime(ref.current.currentTime)
     }
 
     const playClickHandler = () => {
-        if ( music ) {
-            if ( !isPlaying ) setIsPlaying(true)
+        if (music) {
+            if (!isPlaying) setIsPlaying(true)
             else setIsPlaying(false)
         }
     }
@@ -124,7 +124,7 @@ const PlayerControl = ({
     }
 
     const repeatClickHandler = () => {
-        if ( repeatType === "shuffle" ) {
+        if (repeatType === "shuffle") {
             messageApi.open({
                 type: "error",
                 content: "You must turn off shuffle repeat"
@@ -132,12 +132,12 @@ const PlayerControl = ({
             return
         }
 
-        let content : string = "Repeat Musics turned off"
-        if ( repeatOnce === null ) {
+        let content: string = "Repeat Musics turned off"
+        if (repeatOnce === null) {
             setRepeat("all")
             setRepeatOnce(false)
             content = "Repeat all Musics turned on"
-        } else if ( repeatOnce ) {
+        } else if (repeatOnce) {
             setRepeat("off")
             setRepeatOnce(null)
         } else {
@@ -153,12 +153,12 @@ const PlayerControl = ({
     }
 
     const shuffleRepeatClickHandler = () => {
-        let content : string = "Suffle repeat truned on"
-        if ( repeatType === "shuffle" ) {
-            if ( repeatOnce === null ) {
+        let content: string = "Suffle repeat truned on"
+        if (repeatType === "shuffle") {
+            if (repeatOnce === null) {
                 setRepeat("off")
                 content = "Repeat Musics turned off"
-            } else if ( repeatOnce ) {
+            } else if (repeatOnce) {
                 setRepeat("once")
                 content = "Repeat one Music turned on"
             } else {
@@ -176,7 +176,7 @@ const PlayerControl = ({
     }
 
     const previousMusicClickHandler = () => {
-        if ( currentTime < 3 ) {
+        if (currentTime < 3) {
             changeMusic("prev")
         } else {
             ref.current.currentTime = 0
@@ -207,7 +207,7 @@ const PlayerControl = ({
 
         <div className={styles.audio}>
             {
-                music 
+                music
                 && <audio ref={ref} onTimeUpdate={musicTimeUpdateHandler} onLoadedMetadata={metadataLoadHandler} >
                     <source src={music.src} type="audio/mpeg" />
                     Your browser does not support the audio element.
@@ -215,12 +215,37 @@ const PlayerControl = ({
             }
             <div className={styles['slider-wrapper']}>
                 <span className={`${styles.time} ${styles.current}`}>{useFormatSecond(currentTime)}</span>
-                <Slider value={currentTime} onChange={musicTimeChangeHandler} max={duration} tooltip={{ open: false }} />
+                <Slider
+                    value={currentTime}
+                    onChange={musicTimeChangeHandler}
+                    max={duration}
+                    tooltip={{ open: false }}
+                    trackStyle={{
+                        backgroundColor: "#0ac5b2", // Track color
+                        height: "8px", // Track height
+                        borderRadius: "4px", // Rounded track
+                    }}
+                    railStyle={{
+                        backgroundColor: "#646867", // Rail color
+                        height: "8px", // Rail height
+                        borderRadius: "4px", // Rounded rail
+                    }}
+                    handleStyle={{
+                        marginTop: "2px", // Center the handle vertically
+                        width: "18px", // Handle size
+                        minWidth: "18px",
+                        height: "16px", // Handle size
+                        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Handle shadow
+                    }}
+                    style={{
+                        margin: "0 10px", // Add some spacing
+                    }}
+                />
                 <span className={styles.time}>{formatedDuration ? formatedDuration : "00:00"}</span>
 
                 <Dropdown placement='top' menu={{ items: menuItems }}>
                     <span className={styles.button}>
-                        <Icon className={styles.icon} icon={volume === 0 ? "volume-mute-fill" : volume <= 0.65 ? "volume-1-fill" : "volume-max-fill" } />
+                        <Icon className={styles.icon} icon={volume === 0 ? "volume-mute-fill" : volume <= 0.65 ? "volume-1-fill" : "volume-max-fill"} />
                     </span>
                 </Dropdown>
             </div>
