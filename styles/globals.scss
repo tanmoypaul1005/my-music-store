@@ -76,16 +76,16 @@
 //   background-color:  #646867;
 // }
 
-:where(.css-dev-only-do-not-override-1g3iul2).ant-slider .ant-slider-rail {
-  position: absolute !important;
-  background-color: #646867 !important; /* Normal state */
-  border-radius: 2px !important;
-  transition: background-color 0.2s !important;
-}
+// :where(.css-dev-only-do-not-override-1g3iul2).ant-slider .ant-slider-rail {
+//   position: absolute !important;
+//   background-color: #646867 !important; /* Normal state */
+//   border-radius: 2px !important;
+//   transition: background-color 0.2s !important;
+// }
 
-:where(.css-dev-only-do-not-override-1g3iul2).ant-slider:hover .ant-slider-rail {
-  background-color: #646867 !important; /* Same as normal state */
-}
+// :where(.css-dev-only-do-not-override-1g3iul2).ant-slider:hover .ant-slider-rail {
+//   background-color: #646867 !important; /* Same as normal state */
+// }
 
 :has(main.dark):root {
   --main-background: #{$dark-main-background};
