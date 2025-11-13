@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/app-store";
 import useAudioDuration from "@/hooks/use-audio-duration";
 import Icon from "@/components/ui/Icon";
 import styles from "./IndexTopChartItem.module.scss";
-import React, { useEffect, useState, memo ,useRef} from "react";
+import React, { useEffect, useState, memo, useRef } from "react";
 
 const IndexTopChartItem = ({
   musicData,
@@ -93,18 +93,22 @@ const IndexTopChartItem = ({
       <div className={`${styles.link} ${preset === "preset2" ? styles.preset2 : ""} ${isDragging ? styles.dragging : ""}`}>
         {/* <span className={styles.number}>{number}</span> */}
         <Image
+          onClick={musicPlayClickHandler}
           className={styles.img}
           src={musicData.avatar}
           width={90}
           height={70}
           loading="lazy"
           alt={`${musicData.name} music cover image`}
+          style={{ cursor: "pointer" }}
         />
 
-        <Link href="/">
-          <h5 className={styles.title}>{musicData.name}</h5>
-          <h6 className={styles.text}>{musicData.artist}</h6>
-        </Link>
+        <div onClick={musicPlayClickHandler}>
+          <Link href="/">
+            <h5 className={styles.title}>{musicData.name}</h5>
+            <h6 className={styles.text}>{musicData.artist}</h6>
+          </Link>
+        </div>
         {duration ? <>
           <span className={styles.time}>
             {duration ? formatDuration(duration) : "00:00"}
@@ -116,7 +120,7 @@ const IndexTopChartItem = ({
           >
             <Icon icon={currentMusic && isPlaying ? "pause-fill" : "play"} />
           </button>
-        </> : 
+        </> :
           <div className={styles.loadingContainer}>
             <div className={styles.loadingWave}>
               <div className={styles.wave}></div>
