@@ -91,6 +91,7 @@ const Video = () => {
                             height="100%"
                             className={styles.reactPlayer}
                             controls={true}
+                            
                         />
                     </div>
 
