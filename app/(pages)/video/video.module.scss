@@ -445,6 +445,10 @@
 
                 .videoCardTitle {
                     color: var(--primary-color);
+                
+                    [data-theme="light"] & {
+                        color: #000000; // Black for better visibility in light mode
+                    }
                 }
             }
 

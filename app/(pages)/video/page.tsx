@@ -81,7 +81,6 @@ const Video = () => {
 
     return (
         <div className={styles.videoPage}>  
-        
             <div className={styles.mainContent}>
                 <div className={styles.playerContainer}>
                     <div className={styles.playerWrapper}>
@@ -92,6 +91,7 @@ const Video = () => {
                             height="100%"
                             className={styles.reactPlayer}
                             controls={true}
+                            
                         />
                     </div>
 
