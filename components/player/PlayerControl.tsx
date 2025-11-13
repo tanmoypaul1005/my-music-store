@@ -117,6 +117,7 @@ const PlayerControl = ({
 
     const musicTimeChangeHandler = (time: number) => {
         ref.current.currentTime = time
+        setCurrentTime(time); // Update the state to ref
     }
 
     const metadataLoadHandler = () => {
@@ -221,7 +222,7 @@ const PlayerControl = ({
                     max={duration}
                     tooltip={{ open: false }}
                     trackStyle={{
-                        backgroundColor: "#0ac5b2", // Track color
+                        backgroundColor: "#5773ff", // Track color
                         height: "8px", // Track height
                         borderRadius: "4px", // Rounded track
                     }}
