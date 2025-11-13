@@ -65,6 +65,17 @@
   --card-shadow: #{$light-card-shadow};
 }
 
+:where(.css-dev-only-do-not-override-1g3iul2).ant-slider .ant-slider-rail {
+  position: absolute;
+  background-color: #646867; /* Normal state */
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+:where(.css-dev-only-do-not-override-1g3iul2).ant-slider:hover .ant-slider-rail {
+  background-color:  #646867;
+}
+
 :has(main.dark):root {
   --main-background: #{$dark-main-background};
   --header-background: #{$dark-header-background};
