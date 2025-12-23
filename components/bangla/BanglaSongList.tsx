@@ -1,8 +1,12 @@
 "use client";
 import { useAppStore } from "@/store/app-store";
-import React from "react";
 import banglaMusics from "@/server/banglaSong.json";
 import IndexTopChartItem from "../index/top-chart/IndexTopChartItem";
+import BanglaSongCard from "./BanglaSongCard";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Mousewheel } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 import styles from "./banglaSong.module.scss";
 import topSong from "@/server/topSong.json";
 
@@ -37,18 +41,26 @@ const BanglaSongList = () => {
           flex: 1,
           display: "flex",
         }}>Top Bangla song</div>
-      <ul style={{
-        marginBottom: "40px",
-      }} className={styles.list}>
-        {musics.map((music, index) => (
-          <IndexTopChartItem
-            key={music.id}
-            musicData={music}
-            index={index + 1}
-            onMusicClick={playMusicClickHandler}
-          />
-        ))}
-      </ul>
+      <div className={styles.sliderContainer}>
+        <Swiper
+          modules={[Navigation, Mousewheel]}
+          spaceBetween={20}
+          slidesPerView="auto"
+          navigation
+          mousewheel={{ forceToAxis: true }}
+          className={styles.cardSwiper}
+        >
+          {musics.map((music, index) => (
+            <SwiperSlide key={music.id} className={styles.slide}>
+              <BanglaSongCard
+                musicData={music}
+                index={index + 1}
+                onMusicClick={playMusicClickHandler}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
 
       <div
