@@ -6,6 +6,7 @@ import Sidebar from '@/components/sidebar/Sidebar'
 import Header from '@/components/header/Header'
 import styles from './layout.module.scss'
 import Player from '@/components/player/Player'
+import AppInitializer from '@/components/AppInitializer'
 import { Analytics } from "@vercel/analytics/next"
 
 export const metadata : Metadata = {
@@ -33,6 +34,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider>
+          <AppInitializer />
           <Analytics/>
           <div className={styles.main}>
             <Sidebar />

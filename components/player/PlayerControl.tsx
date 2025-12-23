@@ -4,6 +4,7 @@ import { useAppStore } from '@/store/app-store';
 import { Slider, Dropdown, message } from 'antd';
 import type { MenuProps } from 'antd';
 import useFormatSecond from '@/hooks/use-format-second';
+import useAudioPreload from '@/hooks/use-audio-preload';
 
 import Icon from '../ui/Icon';
 
@@ -14,12 +15,39 @@ const PlayerControl = ({
 }: {
     music: Music | null,
 }) => {
-    const [currentTime, setCurrentTime, isPlaying, setIsPlaying, volume, setVolume, changeMusic, repeatType, setRepeat, disableKeydown] = useAppStore(state => [state.currentMusicTime, state.setCurrentMusicTime, state.isPlaying, state.setPlayingState, state.volume, state.setVolume, state.changeMusic, state.repeatType, state.setRepeatType, state.disableKeyDown])
+    const [currentTime, setCurrentTime, isPlaying, setIsPlaying, volume, setVolume, changeMusic, repeatType, setRepeat, disableKeydown, playList] = useAppStore(state => [state.currentMusicTime, state.setCurrentMusicTime, state.isPlaying, state.setPlayingState, state.volume, state.setVolume, state.changeMusic, state.repeatType, state.setRepeatType, state.disableKeyDown, state.playList])
     const [duration, setDuration] = useState<number>(null)
     const [repeatOnce, setRepeatOnce] = useState<boolean>(false)
     const ref = useRef<HTMLAudioElement>()
 
     const [messageApi, contextHolder] = message.useMessage()
+
+    // Preload current music and next music in playlist for faster loading
+    useAudioPreload(music?.src, true);
+    
+    // Preload next music in playlist
+    useEffect(() => {
+        if (music && playList && playList.length > 0) {
+            const currentIndex = playList.findIndex(m => m.id === music.id);
+            const nextIndex = currentIndex + 1 < playList.length ? currentIndex + 1 : 0;
+            const nextMusic = playList[nextIndex];
+            
+            if (nextMusic) {
+                // Preload next audio
+                const preloadLink = document.createElement('link');
+                preloadLink.rel = 'prefetch';
+                preloadLink.as = 'audio';
+                preloadLink.href = nextMusic.src;
+                document.head.appendChild(preloadLink);
+                
+                return () => {
+                    if (document.head.contains(preloadLink)) {
+                        document.head.removeChild(preloadLink);
+                    }
+                };
+            }
+        }
+    }, [music, playList]);
 
     const changeVolumeHandler = (volumeValue: number) => {
         ref.current.volume = volumeValue
@@ -209,7 +237,7 @@ const PlayerControl = ({
         <div className={styles.audio}>
             {
                 music
-                && <audio ref={ref} onTimeUpdate={musicTimeUpdateHandler} onLoadedMetadata={metadataLoadHandler} >
+                && <audio ref={ref} onTimeUpdate={musicTimeUpdateHandler} onLoadedMetadata={metadataLoadHandler} preload="auto">
                     <source src={music.src} type="audio/mpeg" />
                     Your browser does not support the audio element.
                 </audio>

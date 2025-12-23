@@ -1,3 +1,5 @@
+"use client"
+import { useEffect } from "react";
 import IndexTrends from "./trends/IndexTrends";
 import IndexArtits from "./artists/IndexArtists";
 import IndexTopChart from "./top-chart/IndexTopChart";
@@ -13,6 +15,31 @@ const Index = ({
     topArtists: Artist[],
     topMusics: Music[],
 }) => {
+    // Preload first music from top charts for faster initial playback
+    useEffect(() => {
+        if (topMusics && topMusics.length > 0) {
+            const firstMusic = topMusics[0];
+            
+            // Preload using link element
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'audio';
+            preloadLink.href = firstMusic.src;
+            document.head.appendChild(preloadLink);
+
+            // Additionally create an audio element to cache it
+            const audio = new Audio();
+            audio.preload = 'auto';
+            audio.src = firstMusic.src;
+            
+            return () => {
+                if (document.head.contains(preloadLink)) {
+                    document.head.removeChild(preloadLink);
+                }
+            };
+        }
+    }, [topMusics]);
+
     return <section className={styles.section}>
         
         <IndexTrends trendsInfo={trends} />
