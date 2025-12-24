@@ -116,15 +116,11 @@
 
 .artist {
     font-size: 12px;
-    color: var(--text-color-light);
+    color: var(--text-color);
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-[data-theme="dark"] .artist {
-    color: #ffffff;
 }
 
 // Responsive
