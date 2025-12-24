@@ -29,12 +29,13 @@
     
     :global(.swiper-button-next),
     :global(.swiper-button-prev) {
-        color: var(--primary-color);
-        background: var(--primary-color-dark-2);
+        color: white;
+        background: var(--primary-color);
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(87, 115, 255, 0.4);
+        transition: all 0.3s ease;
         
         &:after {
             font-size: 16px;
@@ -43,12 +44,14 @@
         
         &:hover {
             background: var(--primary-color);
-            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(87, 115, 255, 0.6);
         }
     }
     
     :global(.swiper-button-disabled) {
-        opacity: 0.3;
+        opacity: 0.5;
+        background: var(--primary-color);
     }
 }
 
