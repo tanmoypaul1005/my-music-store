@@ -37,6 +37,15 @@
       "playedCount": 12000
     },
     {
+      "id": 1065,
+      "name": "Blue Jeans - Kodom",
+      "src": "/musics/bangla/blue-jeans-kodom.mp3",
+      "artist": "Blue Jeans",
+      "coverImage": "/images/artist/kodomBlue.jpeg",
+      "avatar": "/images/artist/kodomBlue.jpeg",
+      "playedCount": 12000
+    },
+    {
       "id": 102,
       "name": "Ami Hridoyer Kawtha",
       "src": "/musics/bangla/ami-hridoyer-kawtha.mp3",
