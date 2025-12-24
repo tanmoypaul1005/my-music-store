@@ -26,7 +26,7 @@ const BanglaSongCard: React.FC<BanglaSongCardProps> = ({ musicData, index, onMus
                         <Icon className={styles.playIcon} icon="play-fill" />
                     </div>
                 </div>
-                <div className={styles.index}>{index}</div>
+               
             </div>
             <div className={styles.info}>
                 <h3 className={styles.name}>{musicData.name}</h3>
