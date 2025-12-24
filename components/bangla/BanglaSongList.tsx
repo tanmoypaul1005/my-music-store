@@ -1,6 +1,5 @@
 "use client";
 import { useAppStore } from "@/store/app-store";
-import React from "react";
 import banglaMusics from "@/server/banglaSong.json";
 import IndexTopChartItem from "../index/top-chart/IndexTopChartItem";
 import BanglaSongCard from "./BanglaSongCard";
