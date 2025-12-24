@@ -3,6 +3,7 @@ import { useAppStore } from "@/store/app-store";
 import React from "react";
 import banglaMusics from "@/server/banglaSong.json";
 import IndexTopChartItem from "../index/top-chart/IndexTopChartItem";
+import BanglaSongCard from "./BanglaSongCard";
 import styles from "./banglaSong.module.scss";
 import topSong from "@/server/topSong.json";
 
@@ -37,18 +38,16 @@ const BanglaSongList = () => {
           flex: 1,
           display: "flex",
         }}>Top Bangla song</div>
-      <ul style={{
-        marginBottom: "40px",
-      }} className={styles.list}>
+      <div className={styles.cardGrid}>
         {musics.map((music, index) => (
-          <IndexTopChartItem
+          <BanglaSongCard
             key={music.id}
             musicData={music}
             index={index + 1}
             onMusicClick={playMusicClickHandler}
           />
         ))}
-      </ul>
+      </div>
 
 
       <div
