@@ -12,23 +12,23 @@ const Player = () => {
 
     const music = useAppStore(state => state.currentMusic)
 
-    return <>
-    {
-        pathName?.includes('/video') ? null : (
-            <div className={styles.player}>
+    // Don't render player if on video page OR if no music is selected
+    if (pathName?.includes('/video') || !music) {
+        return null;
+    }
+
+    return (
+        <div className={styles.player}>
             <PlayerControl music={music} />
             <PlayerInfo
-                image={music ? music.avatar : logo}
-                imageAlt={music ? music.name : "not found"}
-                name={music ? music.name : "Not found any music selected"}
-                artist={music ? music.artist : "No One..."}
-                musicId={music ? music.id : null}
+                image={music.avatar}
+                imageAlt={music.name}
+                name={music.name}
+                artist={music.artist}
+                musicId={music.id}
             />
         </div>
-        )
-    }
-        
-    </>
+    )
 }
 
 export default Player;

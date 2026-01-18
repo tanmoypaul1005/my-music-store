@@ -1,4 +1,9 @@
+"use client"
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
+import useAudioDuration from '@/hooks/use-audio-duration'
+import useFormatSecond from '@/hooks/use-format-second'
+import Icon from '../ui/Icon'
 import styles from './MusicItem.module.scss'
 
 const MusicItem = ({
@@ -11,6 +16,9 @@ const MusicItem = ({
     const musicClickHandler = () => {
         onMusicClick(musicData)
     }
+
+    const duration = useAudioDuration(musicData.src)
+    const formatDuration = useFormatSecond()
 
     return <li className={styles.item}>
         <div className={styles.fixed}>
@@ -26,6 +34,20 @@ const MusicItem = ({
             />
             <h5 className={styles.title}>{musicData.name}</h5>
             <span className={styles.text}>{musicData.artist}</span>
+            {duration ? (
+                <span className={styles.duration}>
+                    {formatDuration(duration)}
+                </span>
+            ) : (
+                <div className={styles.loadingContainer}>
+                    <div className={styles.loadingWave}>
+                        <div className={styles.wave}></div>
+                        <div className={styles.wave}></div>
+                        <div className={styles.wave}></div>
+                    </div>
+                    <span className={styles.loadingText}>Loading...</span>
+                </div>
+            )}
         </div>
     </li>
 }
