@@ -9,5 +9,21 @@
         font-size: 18px;
         font-weight: 800;
         color: var(--title-color);
+
+        // Tablet
+        @media (max-width: 1024px) {
+            font-size: 17px;
+        }
+
+        // Mobile
+        @media (max-width: 768px) {
+            font-size: 16px;
+        }
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        gap: 15px;
+        margin-bottom: 20px;
     }
 }

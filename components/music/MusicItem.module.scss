@@ -31,6 +31,11 @@
         &:not(.playlist) {
             color: var(--favorite-color);
         }
+
+        // Mobile
+        @media (max-width: 768px) {
+            font-size: 18px;
+        }
     }
 
     .img {
@@ -45,6 +50,16 @@
         font-weight: 800;
         color: var(--title-color);
         margin: 0 0 5px 0;
+
+        // Tablet
+        @media (max-width: 1024px) {
+            font-size: 14px;
+        }
+
+        // Mobile
+        @media (max-width: 768px) {
+            font-size: 13px;
+        }
     }
 
     .text {
@@ -55,6 +70,34 @@
 
         small {
             font-size: 10px;
+        }
+
+        // Mobile
+        @media (max-width: 768px) {
+            font-size: 12px;
+
+            small {
+                font-size: 9px;
+            }
+        }
+    }
+
+    // Tablet
+    @media (max-width: 1024px) {
+        width: 160px;
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        width: 140px;
+    }
+
+    // Small mobile
+    @media (max-width: 480px) {
+        width: 120px;
+
+        .img {
+            margin-bottom: 10px;
         }
     }
 }

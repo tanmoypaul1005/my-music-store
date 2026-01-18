@@ -43,6 +43,32 @@
                 font-size: 23px;
             }
         }
+
+        // Mobile
+        @media (max-width: 768px) {
+            gap: 12px;
+
+            .main {
+                padding: 8px 12px;
+
+                .icon {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        // Small mobile
+        @media (max-width: 480px) {
+            gap: 8px;
+
+            .main {
+                padding: 6px 10px;
+
+                .icon {
+                    font-size: 18px;
+                }
+            }
+        }
     }
 
     .audio {
@@ -57,17 +83,65 @@
             div {
                 flex: 1;
             }
+
+            // Mobile
+            @media (max-width: 768px) {
+                gap: 8px;
+            }
         }
     
         .time {
             font-size: 16px;
             font-weight: 700;
             color: var(--text-color);
+
+            // Mobile
+            @media (max-width: 768px) {
+                font-size: 14px;
+            }
+
+            // Small mobile
+            @media (max-width: 480px) {
+                font-size: 12px;
+            }
         }
     }
 
     .volume {
         height: 150px;
         padding-bottom: 10px;
+
+        // Mobile - hide volume on very small screens
+        @media (max-width: 480px) {
+            display: none;
+        }
+    }
+
+    // Tablet
+    @media (max-width: 1024px) {
+        gap: 20px;
+
+        .button .icon {
+            font-size: 22px;
+        }
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+
+        .button .icon {
+            font-size: 20px;
+        }
+
+        .control {
+            width: 100%;
+        }
+
+        .audio {
+            width: 100%;
+        }
     }
 }

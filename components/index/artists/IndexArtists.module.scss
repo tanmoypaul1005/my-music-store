@@ -10,4 +10,19 @@
     li {
         flex: 1;
     }
+
+    // Tablet
+    @media (max-width: 1024px) {
+        gap: 15px;
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 15px;
+
+        li {
+            width: 100%;
+        }
+    }
 }

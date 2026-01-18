@@ -50,6 +50,69 @@
     .active .icon {
         color: var(--favorite-color);
     }
+
+    // Tablet
+    @media (max-width: 1024px) {
+        width: 30%;
+        gap: 8px;
+
+        .img {
+            width: 55px;
+            height: 55px;
+        }
+
+        .title {
+            font-size: 16px;
+        }
+
+        .artist {
+            font-size: 13px;
+        }
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        width: 100%;
+        justify-content: center;
+
+        .img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .title {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .artist {
+            font-size: 12px;
+        }
+
+        .icon {
+            font-size: 18px;
+        }
+    }
+
+    // Small mobile
+    @media (max-width: 480px) {
+        .img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .title {
+            font-size: 14px;
+        }
+
+        .artist {
+            font-size: 11px;
+        }
+
+        .icon {
+            font-size: 16px;
+        }
+    }
 }
 
 .play {

@@ -18,4 +18,28 @@
     &::-webkit-scrollbar-track {
         background: var(--sidebar-background);
     }
+
+    // Tablet and below - hide sidebar by default
+    @media (max-width: 1024px) {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        max-width: 80%;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        padding: 10px 20px 20px 20px;
+
+        &.open {
+            left: 0;
+        }
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        width: 260px;
+        max-width: 85%;
+        padding: 10px 15px 20px 15px;
+    }
 }

@@ -3,6 +3,16 @@
     font-weight: 800;
     font-size: 20px;
     color: var(--title-color);
+
+    // Tablet
+    @media (max-width: 1024px) {
+        font-size: 18px;
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        font-size: 16px;
+    }
 }
 
 // .list {
@@ -23,4 +33,24 @@
     gap: 35px 25px;
     margin: 0 0 50px 0;
     padding: 0;
+
+    // Tablet
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 30px 20px;
+        margin-bottom: 40px;
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 25px 15px;
+        margin-bottom: 30px;
+    }
+
+    // Small mobile
+    @media (max-width: 480px) {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 20px 12px;
+    }
 }

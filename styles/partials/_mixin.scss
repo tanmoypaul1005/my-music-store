@@ -24,3 +24,28 @@
     text-overflow: ellipsis;
     -webkit-line-clamp: $clamp;
 }
+
+// Responsive breakpoints
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin small-mobile {
+    @media (max-width: 480px) {
+        @content;
+    }
+}

@@ -8,6 +8,13 @@
         color: var(--sidebar-title-color);
         margin-bottom: 15px;
         letter-spacing: 4.5px;
+
+        // Mobile
+        @media (max-width: 768px) {
+            font-size: 12px;
+            letter-spacing: 3.5px;
+            margin-bottom: 12px;
+        }
     }
 
     .list {
@@ -23,5 +30,22 @@
         li {
             width: 100%;
         }
+
+        // Mobile
+        @media (max-width: 768px) {
+            gap: 8px;
+        }
+    }
+
+    // Tablet and below
+    @media (max-width: 1024px) {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    // Mobile
+    @media (max-width: 768px) {
+        padding: 12px;
+        margin-bottom: 12px;
     }
 }
