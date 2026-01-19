@@ -39,12 +39,43 @@
         color: var(--title-color);
         margin-bottom: 5px;
         transition: var(--transition);
+
+        // Tablet
+        @media (max-width: 1024px) {
+            font-size: 17px;
+        }
+
+        // Mobile
+        @media (max-width: 768px) {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        // Small Mobile
+        @media (max-width: 480px) {
+            font-size: 12px;
+        }
     }
 
     .text {
         font-size: 15px;
         font-weight: 500;
         color: var(--text-color);
+
+        // Tablet
+        @media (max-width: 1024px) {
+            font-size: 14px;
+        }
+
+        // Mobile
+        @media (max-width: 768px) {
+            font-size: 13px;
+        }
+
+        // Small Mobile
+        @media (max-width: 480px) {
+            font-size: 12px;
+        }
     }
 
     .button {
