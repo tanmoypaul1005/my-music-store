@@ -105,8 +105,8 @@ const IndexTopChartItem = ({
 
         <div onClick={musicPlayClickHandler}>
           <Link href="/">
-            <h5 className={styles.title}>{musicData.name}</h5>
-            <h6 className={styles.text}>{musicData.artist}</h6>
+            <h5 className={styles.title}>{musicData?.name}</h5>
+            <h6 className={styles.text}>{musicData?.artist}</h6>
           </Link>
         </div>
         {duration ? <>
