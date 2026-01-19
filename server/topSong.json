@@ -36,15 +36,18 @@
       "coverImage": "/images/artist/calum-scott.jpeg",
       "avatar": "/images/artist/calum-scott.jpeg",
       "playedCount": 12000
-    },
-    {
-      "id": 401,
-      "name": "Wiz Khalifa - See You Again ft. Charlie Puth",
-      "src": "/musics/topSong/See-ou gain ft.mp3",
-      "artist": "Wiz Khalifa",
-      "coverImage": "/images/artist/wiz-khalifa.jpeg",
-      "avatar": "/images/artist/wiz-khalifa.jpeg",
-      "playedCount": 12000
     }
+
   ]
 }
+
+
+    // {
+    //   "id": 401,
+    //   "name": "Wiz Khalifa - See You Again ft. Charlie Puth",
+    //   "src": "/musics/topSong/See-ou gain ft.mp3",
+    //   "artist": "Wiz Khalifa",
+    //   "coverImage": "/images/artist/wiz-khalifa.jpeg",
+    //   "avatar": "/images/artist/wiz-khalifa.jpeg",
+    //   "playedCount": 12000
+    // }
