@@ -16,13 +16,20 @@
         gap: 15px;
     }
 
-    // Mobile
+    // Mobile - show 3 items per row
     @media (max-width: 768px) {
-        flex-direction: column;
-        gap: 15px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
 
         li {
             width: 100%;
         }
+    }
+
+    // Small Mobile - keep 3 items but reduce gap
+    @media (max-width: 480px) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
     }
 }
