@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import useAudioDuration from '@/hooks/use-audio-duration'
-import useFormatSecond from '@/hooks/use-format-second'
 import Icon from '../ui/Icon'
 import styles from './MusicItem.module.scss'
 
@@ -17,11 +16,11 @@ const MusicItem = ({
         onMusicClick(musicData)
     }
 
-    const duration = useAudioDuration(musicData.src)
-    const formatDuration = useFormatSecond()
+    const { output, durationSeconds, formatedDuration } = useAudioDuration(musicData.src)
 
     return <li className={styles.item}>
         <div className={styles.fixed}>
+            {output}
         </div>
         <div onClick={musicClickHandler}>
             <Image
@@ -34,9 +33,9 @@ const MusicItem = ({
             />
             <h5 className={styles.title}>{musicData.name}</h5>
             <span className={styles.text}>{musicData.artist}</span>
-            {duration ? (
+            {durationSeconds ? (
                 <span className={styles.duration}>
-                    {formatDuration(duration)}
+                    {formatedDuration}
                 </span>
             ) : (
                 <div className={styles.loadingContainer}>
