@@ -75,7 +75,7 @@ const BanglaSongList = () => {
       }} className={styles.list}>
         {topSong?.music.map((music, index) => (
           <IndexTopChartItem
-          preset="preset2"
+            preset="preset2"
             key={music.id}
             musicData={music}
             index={index + 1}

@@ -1,6 +1,5 @@
 import MainCard from "@/components/ui/main-card/MainCard";
 import IndexArtistItem from "./IndexArtistItem";
-
 import styles from './IndexArtists.module.scss'
 
 const IndexArtits = ({

@@ -95,12 +95,12 @@ const IndexTopChartItem = ({
         <Image
           onClick={musicPlayClickHandler}
           className={styles.img}
-          src={musicData.avatar}
-          width={90}
+          src={musicData?.avatar}
+          width={70}
           height={70}
           loading="lazy"
           alt={`${musicData.name} music cover image`}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", objectFit: "cover" }}
         />
 
         <div onClick={musicPlayClickHandler}>
