@@ -13,6 +13,8 @@ export const iconsName = [
     "heart-fill",
     "moon",
     "more",
+    "menu",
+    "menu-fill",
     "music-note-fill",
     "next",
     "next-fill",
