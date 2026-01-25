@@ -11,6 +11,20 @@ const nextConfig = {
       exclude: ['error', 'warn'] // Keep error and warn logs, remove others
     } : false,
   },
+  // Add headers for better caching
+  async headers() {
+    return [
+      {
+        source: '/musics/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

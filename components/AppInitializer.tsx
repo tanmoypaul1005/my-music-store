@@ -10,8 +10,14 @@ const AppInitializer = () => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
+            // Register service worker for production caching
+            if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+                navigator.serviceWorker.register('/sw.js').catch(() => {});
+            }
+
             const STORAGE_NAME = process.env.NEXT_PUBLIC_APP_STORE;
             const storedData = localStorage.getItem(STORAGE_NAME);
+            const isProduction = process.env.NODE_ENV === 'production';
 
             if (storedData) {
                 const appData: AppLocalStorage = JSON.parse(storedData);
@@ -33,8 +39,28 @@ const AppInitializer = () => {
                     document.head.appendChild(preloadLink);
                 }
 
-                // Preload first 3 songs from playlist for instant playback
-                if (appData.playList && appData.playList.length > 0) {
+                // PRODUCTION: Aggressive preloading - load ALL songs in background
+                if (isProduction && appData.playList && appData.playList.length > 0) {
+                    // Preload all songs aggressively in production
+                    appData.playList.forEach((music, index) => {
+                        setTimeout(() => {
+                            // Use fetch to cache audio files
+                            fetch(music.src, { 
+                                mode: 'cors',
+                                credentials: 'same-origin',
+                                cache: 'force-cache'
+                            }).catch(() => {});
+                            
+                            // Also add prefetch links
+                            const preloadLink = document.createElement('link');
+                            preloadLink.rel = 'prefetch';
+                            preloadLink.as = 'audio';
+                            preloadLink.href = music.src;
+                            document.head.appendChild(preloadLink);
+                        }, index * 50); // Stagger by 50ms to avoid blocking
+                    });
+                } else if (!isProduction && appData.playList && appData.playList.length > 0) {
+                    // DEVELOPMENT: Only preload first 3 songs
                     const songsToPreload = appData.playList.slice(0, 3);
                     songsToPreload.forEach((music, index) => {
                         setTimeout(() => {
