@@ -120,13 +120,29 @@ const PlayerControl = ({
 
     useEffect(() => {
         if (music) {
-            ref.current.src = music.src;
-            ref.current.currentTime = currentTime
-            ref.current.volume = volume;
-            if (!isPlaying) {
-                ref.current.pause();
+            const audio = ref.current;
+            audio.src = music.src;
+            audio.currentTime = currentTime;
+            audio.volume = volume;
+            
+            // Load the audio metadata immediately
+            audio.load();
+            
+            if (isPlaying) {
+                // Use canplay event to ensure smooth playback
+                const playWhenReady = () => {
+                    audio.play().catch(err => console.error('Playback error:', err));
+                };
+                
+                if (audio.readyState >= 3) {
+                    // Audio is already loaded enough to play
+                    audio.play().catch(err => console.error('Playback error:', err));
+                } else {
+                    // Wait for audio to be ready
+                    audio.addEventListener('canplay', playWhenReady, { once: true });
+                }
             } else {
-                ref.current.play();
+                audio.pause();
             }
         }
     }, [music, isPlaying]);
@@ -237,7 +253,13 @@ const PlayerControl = ({
         <div className={styles.audio}>
             {
                 music
-                && <audio ref={ref} onTimeUpdate={musicTimeUpdateHandler} onLoadedMetadata={metadataLoadHandler} preload="auto">
+                && <audio 
+                    ref={ref} 
+                    onTimeUpdate={musicTimeUpdateHandler} 
+                    onLoadedMetadata={metadataLoadHandler}
+                    preload="metadata"
+                    crossOrigin="anonymous"
+                >
                     <source src={music.src} type="audio/mpeg" />
                     Your browser does not support the audio element.
                 </audio>

@@ -17,8 +17,15 @@ const AppInitializer = () => {
                 const appData: AppLocalStorage = JSON.parse(storedData);
                 setInitialApp(appData);
 
-                // Preload the current music if it exists
+                // Preload the current music if it exists with high priority
                 if (appData.currentMusic && appData.currentMusic.src) {
+                    // Create hidden audio element for preloading
+                    const preloadAudio = document.createElement('audio');
+                    preloadAudio.src = appData.currentMusic.src;
+                    preloadAudio.preload = 'auto';
+                    preloadAudio.load();
+                    
+                    // Also add link preload
                     const preloadLink = document.createElement('link');
                     preloadLink.rel = 'preload';
                     preloadLink.as = 'audio';
@@ -26,14 +33,18 @@ const AppInitializer = () => {
                     document.head.appendChild(preloadLink);
                 }
 
-                // Preload first music from playlist if exists
-                if (appData.playList && appData.playList.length > 0 && !appData.currentMusic) {
-                    const firstMusic = appData.playList[0];
-                    const preloadLink = document.createElement('link');
-                    preloadLink.rel = 'preload';
-                    preloadLink.as = 'audio';
-                    preloadLink.href = firstMusic.src;
-                    document.head.appendChild(preloadLink);
+                // Preload first 3 songs from playlist for instant playback
+                if (appData.playList && appData.playList.length > 0) {
+                    const songsToPreload = appData.playList.slice(0, 3);
+                    songsToPreload.forEach((music, index) => {
+                        setTimeout(() => {
+                            const preloadLink = document.createElement('link');
+                            preloadLink.rel = index === 0 ? 'preload' : 'prefetch';
+                            preloadLink.as = 'audio';
+                            preloadLink.href = music.src;
+                            document.head.appendChild(preloadLink);
+                        }, index * 100);
+                    });
                 }
             } else {
                 // Initialize with default values if no stored data
