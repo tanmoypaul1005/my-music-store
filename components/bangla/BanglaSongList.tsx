@@ -1,6 +1,7 @@
 "use client";
 import { useAppStore } from "@/store/app-store";
 import banglaMusics from "@/server/banglaSong.json";
+import populerBanglaSong from "@/server/populerBanglaSong.json";
 import IndexTopChartItem from "../index/top-chart/IndexTopChartItem";
 import BanglaSongCard from "./BanglaSongCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,6 +14,7 @@ import topSong from "@/server/topSong.json";
 const BanglaSongList = () => {
 
   const musics = banglaMusics?.music;
+  const populermusics = populerBanglaSong?.music;
 
   const PLAY_LIST_ID = "top-charts-musics-playlist";
 
@@ -51,6 +53,34 @@ const BanglaSongList = () => {
           className={styles.cardSwiper}
         >
           {musics.map((music, index) => (
+            <SwiperSlide key={music.id} className={styles.slide}>
+              <BanglaSongCard
+                musicData={music}
+                index={index + 1}
+                onMusicClick={playMusicClickHandler}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+   <div
+        className={styles.title}
+        style={{
+          marginBottom: "20px",
+          flex: 1,
+          display: "flex",
+        }}>Popular Bangla Songs</div>
+      <div className={styles.sliderContainer}>
+        <Swiper
+          modules={[Navigation, Mousewheel]}
+          spaceBetween={20}
+          slidesPerView="auto"
+          navigation
+          mousewheel={{ forceToAxis: true }}
+          className={styles.cardSwiper}
+        >
+          {populermusics.map((music, index) => (
             <SwiperSlide key={music.id} className={styles.slide}>
               <BanglaSongCard
                 musicData={music}
