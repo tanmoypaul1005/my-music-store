@@ -64,7 +64,7 @@ const BanglaSongList = () => {
         </Swiper>
       </div>
 
-   <div
+      <div
         className={styles.title}
         style={{
           marginBottom: "20px",
@@ -100,19 +100,29 @@ const BanglaSongList = () => {
           flex: 1,
           display: "flex",
         }}>Top song</div>
-      <ul style={{
-        marginBottom: "40px",
-      }} className={styles.list}>
-        {topSong?.music.map((music, index) => (
-          <IndexTopChartItem
-            preset="preset2"
-            key={music.id}
-            musicData={music}
-            index={index + 1}
-            onMusicClick={playMusicClickHandler}
-          />
-        ))}
-      </ul>
+
+      <div className={styles.sliderContainer}>
+        <Swiper
+          modules={[Navigation, Mousewheel]}
+          spaceBetween={20}
+          slidesPerView="auto"
+          navigation
+          mousewheel={{ forceToAxis: true }}
+          className={styles.cardSwiper}
+        >
+          {topSong?.music?.map((music, index) => (
+            <SwiperSlide key={music.id} className={styles.slide}>
+              <BanglaSongCard
+                musicData={music}
+                index={index + 1}
+                onMusicClick={playMusicClickHandler}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+
     </div>
   );
 };
