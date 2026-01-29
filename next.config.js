@@ -2,8 +2,8 @@
 const nextConfig = {
   images: {
     domains: ['i.imgur.com', 'i.scdn.co',"i.ytimg.com","encrypted-tbn0.gstatic.com"],
+    unoptimized: true,
   },
-  unoptimized: true,
   reactStrictMode: false,
   // Remove console logs in production
   compiler: {
