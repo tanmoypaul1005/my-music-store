@@ -121,7 +121,6 @@ const BanglaSongList = () => {
         </Swiper>
       </div>
 
-
     </div>
   );
 };
