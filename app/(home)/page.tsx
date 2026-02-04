@@ -9,9 +9,8 @@ const HomePage = async () => {
     const trends = await GetTrends()
     const topArtists = await GetTopArtists()
     const topMusic = await GetTopMusics()
-    const allSongs = await GetMusics()
 
-    return <Index trends={trends} topArtists={topArtists} topMusics={topMusic} allSongs={allSongs} />
+    return <Index trends={trends} topArtists={topArtists} topMusics={topMusic} />
 }
 
 export default HomePage;

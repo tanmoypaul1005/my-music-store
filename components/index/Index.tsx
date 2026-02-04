@@ -4,19 +4,16 @@ import IndexTrends from "./trends/IndexTrends";
 import IndexArtits from "./artists/IndexArtists";
 import IndexTopChart from "./top-chart/IndexTopChart";
 import PopularArtists from "./popular-artists/PopularArtists";
-
 import styles from './Index.module.scss'
 
 const Index = ({
     trends,
     topArtists,
     topMusics,
-    allSongs,
 }: {
     trends: Music[],
     topArtists: Artist[],
     topMusics: Music[],
-    allSongs: Music[],
 }) => {
     // Preload first music from top charts for faster initial playback
     useEffect(() => {
@@ -47,7 +44,7 @@ const Index = ({
 
         <IndexTrends trendsInfo={trends} />
 
-        <PopularArtists songs={allSongs} topArtists={topArtists} />
+        <PopularArtists />
 
         <div className={styles.content}>
 
