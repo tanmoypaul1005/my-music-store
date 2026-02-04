@@ -8,19 +8,41 @@ import  populerBanglaSong  from "@/server/populerBanglaSong.json";
 export default function PopularArtists({  }) {
   
   // Merge all songs together
-  const mergedSongs = [...banglaSong?.music, ...populerBanglaSong?.music].flat();
+  const allSongs = [...banglaSong?.music, ...populerBanglaSong?.music];
+  
+  // Extract unique artists with song count
+  const artistMap = new Map<string, { name: string; avatar: string; songCount: number }>();
+  
+  allSongs.forEach(song => {
+    const artistName = song.artist;
+    if (artistMap.has(artistName)) {
+      const artist = artistMap.get(artistName)!;
+      artist.songCount++;
+    } else {
+      artistMap.set(artistName, {
+        name: artistName,
+        avatar: song.avatar,
+        songCount: 1
+      });
+    }
+  });
+
+  // Convert to array and sort by song count
+  const uniqueArtists = Array.from(artistMap.values())
+    .sort((a, b) => b.songCount - a.songCount)
+    .slice(0, 6); // Show top 6 artists
 
   return (
     <div className={styles.popularArtists}>
       <div className={styles.header}>
         <h2 className={styles.title}>Popular artists</h2>
-        <Link href="/artists" className={styles.showAll}>
+        {/* <Link href="/artists" className={styles.showAll}>
           Show all
-        </Link>
+        </Link> */}
       </div>
 
       <div className={styles.artistsGrid}>
-        {mergedSongs?.map((artist, index) => (
+        {uniqueArtists?.map((artist, index) => (
           <Link
             key={index}
             href={`/artist/${encodeURIComponent(artist.name)}`}
@@ -28,12 +50,12 @@ export default function PopularArtists({  }) {
           >
             <div className={styles.avatarWrapper}>
               <img
-                src={artist.avatar}
-                alt={artist.name}
+                src={artist?.avatar}
+                alt={artist?.name}
                 className={styles.avatar}
               />
             </div>
-            <h3 className={styles.artistName}>{artist.artist}</h3>
+            <h3 className={styles.artistName}>{artist?.name}</h3>
             <p className={styles.artistLabel}>Artist</p>
           </Link>
         ))}
