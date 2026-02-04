@@ -1,0 +1,149 @@
+@import "@/styles/partials/variables";
+@import "@/styles/partials/mixin";
+
+.popularArtists {
+  margin: 3rem 0;
+  padding: 0 2rem;
+
+  @include tablet {
+    padding: 0 1.5rem;
+    margin: 2.5rem 0;
+  }
+
+  @include mobile {
+    padding: 0 1rem;
+    margin: 2rem 0;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  @include mobile {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+
+  @include tablet {
+    font-size: 1.8rem;
+  }
+
+  @include mobile {
+    font-size: 1.5rem;
+  }
+}
+
+.showAll {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $primary-color;
+  }
+
+  @include mobile {
+    font-size: 0.9rem;
+  }
+}
+
+.artistsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+
+  @include tablet {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+.artistCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  
+  border-radius: 12px;
+  background: var(--card-bg);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+    transform: translateY(-5px);
+    
+    .avatar {
+      transform: scale(1.05);
+    }
+  }
+
+  @include mobile {
+    padding: 1rem;
+  }
+}
+
+.avatarWrapper {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  @include tablet {
+    width: 130px;
+    height: 130px;
+  }
+
+  @include mobile {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0.8rem;
+  }
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.artistName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+  text-align: center;
+  word-break: break-word;
+
+  @include mobile {
+    font-size: 0.95rem;
+  }
+}
+
+.artistLabel {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 500;
+
+  @include mobile {
+    font-size: 0.85rem;
+  }
+}
