@@ -2,12 +2,13 @@
 import Link from "next/link";
 import styles from "./PopularArtists.module.scss";
 import  banglaSong  from "@/server/banglaSong.json";
+import  populerBanglaSong  from "@/server/populerBanglaSong.json";
 
 
 export default function PopularArtists({  }) {
   
   // Merge all songs together
-  const mergedSongs = [...banglaSong?.music];
+  const mergedSongs = [...banglaSong?.music, ...populerBanglaSong?.music].flat();
 
   return (
     <div className={styles.popularArtists}>
@@ -32,7 +33,7 @@ export default function PopularArtists({  }) {
                 className={styles.avatar}
               />
             </div>
-            <h3 className={styles.artistName}>{artist.name}</h3>
+            <h3 className={styles.artistName}>{artist.artist}</h3>
             <p className={styles.artistLabel}>Artist</p>
           </Link>
         ))}

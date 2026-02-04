@@ -47,11 +47,10 @@ const Index = ({
         <PopularArtists />
 
         <div className={styles.content}>
-
             <IndexTopChart musics={topMusics} />
             <IndexArtits artists={topArtists} />
-
         </div>
+        
     </section>
 }
 
