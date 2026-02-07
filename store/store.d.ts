@@ -36,6 +36,7 @@ interface AppStoreState {
     // prevMusic: () => void,
     setVolume: (newVal: number) => void,
     setPlaylist: (id: string, musics: Music[]) => void,
+    setPlayListId: (id: string) => void,
     // changeFirstOpen: () => void,
     setCurrentMusicTime: (time: number) => void,
 }

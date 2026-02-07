@@ -56,7 +56,7 @@ const changeAppLocalStorage = (payload: AppLocalStoragePayload) => {
     }
 }
 
-export const useAppStore = create<AppStoreState>() ((set) => ({
+export const useAppStore = create<AppStoreState>((set) => ({
     currentMusic: null,
     isPlaying: false,
     repeatType: "all",
@@ -217,6 +217,16 @@ export const useAppStore = create<AppStoreState>() ((set) => ({
         changeAppLocalStorage({
             type: "shuffle",
             array: indexes
+        })
+    }
+    ,
+    setPlayListId: (id: string) => {
+        set(() => ({ playListId: id }))
+        // Persist the playlist id along with current playlist to localStorage
+        changeAppLocalStorage({
+            type: "playlist",
+            playlist: useAppStore.getState().playList,
+            id
         })
     }
 }))

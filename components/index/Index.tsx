@@ -3,14 +3,13 @@ import { useEffect } from "react";
 import IndexTrends from "./trends/IndexTrends";
 import IndexArtits from "./artists/IndexArtists";
 import IndexTopChart from "./top-chart/IndexTopChart";
-
 import styles from './Index.module.scss'
 
 const Index = ({
     trends,
     topArtists,
     topMusics,
-} : {
+}: {
     trends: Music[],
     topArtists: Artist[],
     topMusics: Music[],
@@ -19,7 +18,7 @@ const Index = ({
     useEffect(() => {
         if (topMusics && topMusics.length > 0) {
             const firstMusic = topMusics[0];
-            
+
             // Preload using link element
             const preloadLink = document.createElement('link');
             preloadLink.rel = 'preload';
@@ -31,7 +30,7 @@ const Index = ({
             const audio = new Audio();
             audio.preload = 'auto';
             audio.src = firstMusic.src;
-            
+
             return () => {
                 if (document.head.contains(preloadLink)) {
                     document.head.removeChild(preloadLink);
@@ -41,14 +40,14 @@ const Index = ({
     }, [topMusics]);
 
     return <section className={styles.section}>
-        
-        <IndexTrends trendsInfo={trends} />
-        <div className={styles.content}>
 
+        <IndexTrends trendsInfo={trends} />
+
+        <div className={styles.content}>
             <IndexTopChart musics={topMusics} />
             <IndexArtits artists={topArtists} />
-
         </div>
+        
     </section>
 }
 

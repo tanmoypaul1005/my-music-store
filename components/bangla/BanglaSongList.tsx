@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from "./banglaSong.module.scss";
 import topSong from "@/server/topSong.json";
+import PopularArtists from "../index/popular-artists/PopularArtists";
 
 const BanglaSongList = () => {
 
@@ -67,7 +68,7 @@ const BanglaSongList = () => {
       <div
         className={styles.title}
         style={{
-          marginBottom: "20px",
+          marginBottom: "0px",
           flex: 1,
           display: "flex",
         }}>Popular Bangla Songs</div>
@@ -92,10 +93,13 @@ const BanglaSongList = () => {
         </Swiper>
       </div>
 
+      <PopularArtists />
+
       <div
         className={styles.title}
         style={{
           marginBottom: "20px",
+          marginTop: "20px",
           flex: 1,
           display: "flex",
         }}>Top song</div>

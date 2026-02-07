@@ -1,0 +1,112 @@
+@import "@/styles/partials/variables";
+@import "@/styles/partials/mixin";
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -20px;
+
+  @include mobile {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-color);
+}
+
+
+.artistsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0rem;
+
+  @include tablet {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+.artistCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  
+  border-radius: 12px;
+  background: var(--card-bg);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover-bg);
+    transform: translateY(-5px);
+    
+    .avatar {
+      transform: scale(1.05);
+    }
+  }
+
+  @include mobile {
+    padding: 1rem;
+  }
+}
+
+.avatarWrapper {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 0rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  @include tablet {
+    width: 130px;
+    height: 130px;
+  }
+
+  @include mobile {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0.8rem;
+  }
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.artistName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.1rem;
+  text-align: center;
+  word-break: break-word;
+
+  @include mobile {
+    font-size: 0.95rem;
+  }
+}
+
+.artistLabel {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 500;
+
+  @include mobile {
+    font-size: 0.85rem;
+  }
+}
