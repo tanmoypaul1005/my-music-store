@@ -62,7 +62,6 @@ export default function PopularArtists({  }) {
               />
             </div>
             <h3 className={styles.artistName}>{artist?.name}</h3>
-            <p className={styles.artistLabel}>Artist</p>
           </Link>
         ))}
       </div>
