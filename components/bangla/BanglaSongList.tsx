@@ -99,9 +99,11 @@ const BanglaSongList = () => {
         className={styles.title}
         style={{
           marginBottom: "20px",
-          marginTop: "20px",
+          marginTop: "40px",
           flex: 1,
           display: "flex",
+          fontSize: "22px",
+          fontWeight: "800",
         }}>Top song</div>
 
       <div className={styles.sliderContainer}>
