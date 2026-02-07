@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from "./banglaSong.module.scss";
 import topSong from "@/server/topSong.json";
+import PopularArtists from "../index/popular-artists/PopularArtists";
 
 const BanglaSongList = () => {
 
@@ -92,6 +93,8 @@ const BanglaSongList = () => {
         </Swiper>
       </div>
 
+
+<PopularArtists />
       <div
         className={styles.title}
         style={{

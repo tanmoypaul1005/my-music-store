@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import IndexTrends from "./trends/IndexTrends";
 import IndexArtits from "./artists/IndexArtists";
 import IndexTopChart from "./top-chart/IndexTopChart";
-import PopularArtists from "./popular-artists/PopularArtists";
 import styles from './Index.module.scss'
 
 const Index = ({
@@ -43,8 +42,6 @@ const Index = ({
     return <section className={styles.section}>
 
         <IndexTrends trendsInfo={trends} />
-
-        <PopularArtists />
 
         <div className={styles.content}>
             <IndexTopChart musics={topMusics} />
