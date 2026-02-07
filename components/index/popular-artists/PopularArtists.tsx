@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import styles from "./PopularArtists.module.scss";
-import  banglaSong  from "@/server/banglaSong.json";
-import  populerBanglaSong  from "@/server/populerBanglaSong.json";
+import banglaSong from "@/server/banglaSong.json";
+import populerBanglaSong from "@/server/populerBanglaSong.json";
+import artistList from "@/server/artistList.json";
 
 
 export default function PopularArtists({  }) {
@@ -19,9 +20,14 @@ export default function PopularArtists({  }) {
       const artist = artistMap.get(artistName)!;
       artist.songCount++;
     } else {
+      // Find artist from artistList.json to get the correct avatar
+      const artistData = artistList.artist.find(
+        a => a.name.toLowerCase() === artistName.toLowerCase()
+      );
+      
       artistMap.set(artistName, {
         name: artistName,
-        avatar: song.avatar,
+        avatar: artistData?.avatar || song.avatar, // Use artistList avatar if available, fallback to song avatar
         songCount: 1
       });
     }
