@@ -10,12 +10,11 @@ interface ArtistDetailProps {
 }
 
 export default function ArtistDetail({ artist, songs }: ArtistDetailProps) {
-  const { setMusic, setPlaylist, setPlayListId } = useAppStore();
+  const { setMusic, setPlaylist } = useAppStore();
 
   const musicClickHandler = (music: Music) => {
     setMusic(music);
-    setPlaylist(songs);
-    setPlayListId(`${artist}-artist-playlist`);
+    setPlaylist(`${artist}-artist-playlist`, songs);
   };
 
   if (!songs || songs.length === 0) {
