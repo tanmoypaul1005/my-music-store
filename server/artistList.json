@@ -1,0 +1,34 @@
+{
+   "artist": [
+        {
+            "id": 1,
+            "name": "shironamhin",
+            "avatar": "https://i1.sndcdn.com/artworks-000472273392-8pk937-t500x500.jpg"
+        },
+        {
+            "id": 2,
+            "name": "LEVELFIVEtheband",
+            "avatar": "/artists/shreya.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Kaaktaal",
+            "avatar": "/artists/atif.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Jayati Chakraborty",
+            "avatar": "/artists/neha.jpg"
+        },
+        {
+            "id": 5,
+            "name": "Blue Jeans",
+            "avatar": "/artists/badshah.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Guru Randhawa",
+            "avatar": "/artists/guru.jpg"
+        }
+    ]
+}
