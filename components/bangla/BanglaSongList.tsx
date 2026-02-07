@@ -93,8 +93,8 @@ const BanglaSongList = () => {
         </Swiper>
       </div>
 
-
-<PopularArtists />
+      <PopularArtists />
+      
       <div
         className={styles.title}
         style={{

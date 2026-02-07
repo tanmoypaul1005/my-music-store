@@ -1,26 +1,12 @@
 @import "@/styles/partials/variables";
 @import "@/styles/partials/mixin";
 
-.popularArtists {
-  margin: 3rem 0;
-  padding: 0 2rem;
-
-  @include tablet {
-    padding: 0 1.5rem;
-    margin: 2.5rem 0;
-  }
-
-  @include mobile {
-    padding: 0 1rem;
-    margin: 2rem 0;
-  }
-}
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
 
   @include mobile {
     margin-bottom: 1.5rem;
