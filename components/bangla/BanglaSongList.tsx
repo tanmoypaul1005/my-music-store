@@ -68,7 +68,7 @@ const BanglaSongList = () => {
       <div
         className={styles.title}
         style={{
-          marginBottom: "20px",
+          marginBottom: "0px",
           flex: 1,
           display: "flex",
         }}>Popular Bangla Songs</div>
@@ -94,11 +94,12 @@ const BanglaSongList = () => {
       </div>
 
       <PopularArtists />
-      
+
       <div
         className={styles.title}
         style={{
           marginBottom: "20px",
+          marginTop: "20px",
           flex: 1,
           display: "flex",
         }}>Top song</div>

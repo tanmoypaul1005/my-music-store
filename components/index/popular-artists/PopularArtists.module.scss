@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0rem;
+  margin-top: -20px;
 
   @include mobile {
     margin-bottom: 1.5rem;
@@ -14,48 +14,25 @@
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: var(--text-color);
-
-  @include tablet {
-    font-size: 1.8rem;
-  }
-
-  @include mobile {
-    font-size: 1.5rem;
-  }
 }
 
-.showAll {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: $primary-color;
-  }
-
-  @include mobile {
-    font-size: 0.9rem;
-  }
-}
 
 .artistsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
+  gap: 0rem;
 
   @include tablet {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   @include mobile {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
+    gap: 1rem;
   }
 }
 
@@ -87,7 +64,7 @@
 .avatarWrapper {
   width: 150px;
   height: 150px;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -115,7 +92,7 @@
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.1rem;
   text-align: center;
   word-break: break-word;
 
