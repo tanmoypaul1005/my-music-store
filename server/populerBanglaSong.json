@@ -14,7 +14,7 @@
       "name": "Long Distance Love | Coke Studio Bangla",
       "src": "/musics/bangla/longDistance.mp3",
       "artist": "Ankan X Afrin",
-      "coverImage":"/images/music/longDistance.webp",
+      "coverImage": "/images/music/longDistance.webp",
       "avatar": "/images/music/longDistance.webp",
       "playedCount": 12000
     },
@@ -52,6 +52,33 @@
       "artist": "Angel Noor",
       "coverImage": "/images/music/jodiAbar.webp",
       "avatar": "/images/music/jodiAbar.webp",
+      "playedCount": 12000
+    },
+    {
+      "id": 100245,
+      "name": "Jhumka | Xefer x Muza",
+      "src": "/musics/bangla/Jhumka.m4a",
+      "artist": "Xefer x Muza",
+      "coverImage": "https://i.imgur.com/XhJ5aVG.jpeg",
+      "avatar": "https://i.imgur.com/XhJ5aVG.jpeg",
+      "playedCount": 12000
+    },
+    {
+      "id": 100246,
+      "name": "Ki Name Deke Bolbo Tomake",
+      "src": "/musics/bangla/Ki-Name-Deke-Bolbo-Tomake.m4a",
+      "artist": "Miftah Zaman",
+      "coverImage": "https://i.imgur.com/sHE1vPk.jpeg",
+      "avatar": "https://i.imgur.com/sHE1vPk.jpeg",
+      "playedCount": 12000
+    },
+    {
+      "id": 100247,
+      "name": "Tomake | তোমাকে | Parineeta",
+      "src": "/musics/bangla/Tomake.m4a",
+      "artist": "Shreya Ghoshal",
+      "coverImage": "https://i.imgur.com/M1Ioq6n.jpeg",
+      "avatar": "https://i.imgur.com/M1Ioq6n.jpeg",
       "playedCount": 12000
     }
   ]
