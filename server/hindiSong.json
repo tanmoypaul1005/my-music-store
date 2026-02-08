@@ -32,8 +32,8 @@
       "name": "Tera Hone Laga Hoon - Atif Aslam",
       "src": "/musics/hindi/tera-hone-laga-hoon.mp3",
       "artist": "Atif Aslam",
-      "coverImage":"https://i.imgur.com/oopKg5E.jpeg",
-      "avatar":"https://i.imgur.com/oopKg5E.jpeg",
+      "coverImage": "https://i.imgur.com/oopKg5E.jpeg",
+      "avatar": "https://i.imgur.com/oopKg5E.jpeg",
       "playedCount": 15000
     },
     {
@@ -44,7 +44,6 @@
       "coverImage": "https://i.imgur.com/0BdmVnz.jpeg",
       "avatar": "https://i.imgur.com/0BdmVnz.jpeg",
       "playedCount": 12000
-  
     },
     {
       "id": 206,
@@ -62,6 +61,15 @@
       "artist": "Ali Sethi x Shae Gill",
       "coverImage": "https://i.imgur.com/D1cl3lX.jpeg",
       "avatar": "https://i.imgur.com/D1cl3lX.jpeg",
+      "playedCount": 12000
+    },
+    {
+      "id": 208,
+      "name": "Channa Mereya",
+      "src": "/musics/hindi/Channa-Mereya.m4a",
+      "artist": "Arijit Singh | Pritam",
+      "coverImage": "https://i.imgur.com/7anBcim.jpeg",
+      "avatar": "https://i.imgur.com/7anBcim.jpeg",
       "playedCount": 12000
     }
   ]
