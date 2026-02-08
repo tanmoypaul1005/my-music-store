@@ -68,7 +68,7 @@ const BanglaSongList = () => {
       <div
         className={styles.title}
         style={{
-          marginBottom: "0px",
+          marginBottom: "20px",
           flex: 1,
           display: "flex",
         }}>Popular Bangla Songs</div>
