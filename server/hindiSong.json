@@ -67,9 +67,18 @@
       "id": 208,
       "name": "Channa Mereya",
       "src": "/musics/hindi/Channa-Mereya.m4a",
-      "artist": "Arijit Singh | Pritam",
+      "artist": "Arijit Singh",
       "coverImage": "https://i.imgur.com/7anBcim.jpeg",
       "avatar": "https://i.imgur.com/7anBcim.jpeg",
+      "playedCount": 12000
+    },
+    {
+      "id": 209,
+      "name": "Ae Dil Hai Mushkil | Arijit Singh",
+      "src": "/musics/hindi/Ae-Dil-Hai-Mushkil.m4a",
+      "artist": "Arijit Singh",
+      "coverImage": "https://i.imgur.com/F1DvSm3.jpeg",
+      "avatar": "https://i.imgur.com/F1DvSm3.jpeg",
       "playedCount": 12000
     }
   ]
