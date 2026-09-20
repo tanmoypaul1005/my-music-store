@@ -16,25 +16,15 @@
 }
 
 .sidebar {
-    max-width: 320px;
+    // Keep navigation compact so the content area gets priority on desktop.
+    width: 250px;
+    flex: 0 0 250px;
+    box-sizing: border-box;
     height: 100%;
     background-color: var(--sidebar-background);
-    padding: 10px 30px 30px 30px;
-    flex: 1.5;
-    overflow: auto;
-
-    &::-webkit-scrollbar {
-        width: 6.5px;
-        height: 2.5px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: var(--scrollbar-thumb-color);
-    }
-    
-    &::-webkit-scrollbar-track {
-        background: var(--sidebar-background);
-    }
+    padding: 10px 20px 30px;
+    // The navigation is intentionally compact and must not create its own scrollbars.
+    overflow: hidden;
 
     // Tablet and below - hide sidebar by default
     @media (max-width: 1024px) {
@@ -42,6 +32,7 @@
         top: 0;
         left: -100%;
         width: 280px;
+        flex: none;
         max-width: 80%;
         height: 100vh;
         z-index: 1000;
