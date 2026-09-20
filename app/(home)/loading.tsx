@@ -4,4 +4,5 @@ const HomePageLoading = () => {
     return <IndexSkeleton />
 }
 
+
 export default HomePageLoading;
