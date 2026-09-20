@@ -1,5 +1,9 @@
 "use client";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import styles from "./PopularArtists.module.scss";
 import banglaSong from "@/server/banglaSong.json";
 import populerBanglaSong from "@/server/populerBanglaSong.json";
@@ -47,24 +51,32 @@ export default function PopularArtists({  }) {
         </Link> */}
       </div>
 
-      <div className={styles.artistsGrid}>
+      <Swiper
+        modules={[Navigation, Mousewheel]}
+        spaceBetween={20}
+        slidesPerView="auto"
+        navigation
+        mousewheel={{ forceToAxis: true }}
+        className={styles.artistsSwiper}
+      >
         {uniqueArtists?.map((artist, index) => (
-          <Link
-            key={index}
-            href={`/artist/${encodeURIComponent(artist.name)}`}
-            className={styles.artistCard}
-          >
-            <div className={styles.avatarWrapper}>
-              <img
-                src={artist?.avatar}
-                alt={artist?.name}
-                className={styles.avatar}
-              />
-            </div>
-            <h3 className={styles.artistName}>{artist?.name}</h3>
-          </Link>
+          <SwiperSlide key={artist.name} className={styles.slide}>
+            <Link
+              href={`/artist/${encodeURIComponent(artist.name)}`}
+              className={styles.artistCard}
+            >
+              <div className={styles.avatarWrapper}>
+                <img
+                  src={artist?.avatar}
+                  alt={artist?.name}
+                  className={styles.avatar}
+                />
+              </div>
+              <h3 className={styles.artistName}>{artist?.name}</h3>
+            </Link>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 }

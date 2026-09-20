@@ -6,7 +6,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: -20px;
+  margin-top: 0;
+  margin-bottom: 20px;
 
   @include mobile {
     margin-bottom: 1.5rem;
@@ -20,19 +21,34 @@
 }
 
 
-.artistsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 0rem;
+.artistsSwiper {
+  padding: 10px 0 20px;
 
-  @include tablet {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
+  :global(.swiper-button-next),
+  :global(.swiper-button-prev) {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(87, 115, 255, 0.4);
+
+    &:after {
+      font-size: 16px;
+      font-weight: 800;
+    }
   }
 
+  :global(.swiper-button-disabled) {
+    opacity: 0.5;
+  }
+}
+
+.slide {
+  width: 160px !important;
+
   @include mobile {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    width: 130px !important;
   }
 }
 
@@ -57,7 +73,7 @@
   }
 
   @include mobile {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 }
 
@@ -75,8 +91,8 @@
   }
 
   @include mobile {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     margin-bottom: 0.8rem;
   }
 }
