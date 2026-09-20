@@ -80,8 +80,17 @@
             justify-content: space-between;
             gap: 12px;
     
-            div {
+            .progressSlider {
                 flex: 1;
+                min-width: 0;
+                height: 8px;
+                margin: 0 10px;
+                accent-color: #5773ff;
+                cursor: pointer;
+
+                &:disabled {
+                    cursor: default;
+                }
             }
 
             // Mobile
@@ -115,6 +124,15 @@
         @media (max-width: 480px) {
             display: none;
         }
+    }
+
+    .volumeSlider {
+        width: 150px;
+        height: 8px;
+        margin: 70px -66px;
+        transform: rotate(-90deg);
+        accent-color: #5773ff;
+        cursor: pointer;
     }
 
     // Tablet

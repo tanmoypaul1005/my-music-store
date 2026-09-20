@@ -1,18 +1,22 @@
 .slider {
-    max-height: 500px;
+    height: 420px;
+    max-height: 420px;
 
     // Tablet
     @media (max-width: 1024px) {
-        max-height: 450px;
+        height: 380px;
+        max-height: 380px;
     }
 
     // Mobile
     @media (max-width: 768px) {
-        max-height: 400px;
+        height: 340px;
+        max-height: 340px;
     }
 
     // Small mobile
     @media (max-width: 480px) {
-        max-height: 350px;
+        height: 300px;
+        max-height: 300px;
     }
 }
