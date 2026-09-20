@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useEffect, useState } from 'react';
 import { useAppStore } from '@/store/app-store';
-import { Slider, Dropdown, message } from 'antd';
-import type { MenuProps } from 'antd';
+import { Dropdown, message } from 'antd';
 import useFormatSecond from '@/hooks/use-format-second';
 import useAudioPreload from '@/hooks/use-audio-preload';
 
@@ -54,12 +53,21 @@ const PlayerControl = ({
         setVolume(volumeValue)
     }
 
-    const menuItems: MenuProps['items'] = [
+    const menuItems = [
         {
             key: "1",
             label: (
                 <div style={{ height: "150px", padding: "10px 0" }}>
-                    <Slider vertical min={0} defaultValue={volume} max={1} tipFormatter={(value) => `${value * 100}`} step={0.05} onChange={changeVolumeHandler} />
+                    <input
+                        aria-label="Volume"
+                        className={styles.volumeSlider}
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value={volume}
+                        onChange={(event) => changeVolumeHandler(Number(event.target.value))}
+                    />
                 </div>
             )
         }
@@ -266,31 +274,16 @@ const PlayerControl = ({
             }
             <div className={styles['slider-wrapper']}>
                 <span className={`${styles.time} ${styles.current}`}>{useFormatSecond(currentTime)}</span>
-                <Slider
-                    value={currentTime}
-                    onChange={musicTimeChangeHandler}
-                    max={duration}
-                    tooltip={{ open: false }}
-                    trackStyle={{
-                        backgroundColor: "#5773ff", // Track color
-                        height: "8px", // Track height
-                        borderRadius: "4px", // Rounded track
-                    }}
-                    railStyle={{
-                        backgroundColor: "#646867", // Rail color
-                        height: "8px", // Rail height
-                        borderRadius: "4px", // Rounded rail
-                    }}
-                    handleStyle={{
-                        marginTop: "2px", // Center the handle vertically
-                        width: "18px", // Handle size
-                        minWidth: "18px",
-                        height: "16px", // Handle size
-                        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Handle shadow
-                    }}
-                    style={{
-                        margin: "0 10px", // Add some spacing
-                    }}
+                <input
+                    aria-label="Song progress"
+                    className={styles.progressSlider}
+                    type="range"
+                    min="0"
+                    max={duration || 0}
+                    step="0.1"
+                    value={Math.min(currentTime, duration || 0)}
+                    disabled={!duration}
+                    onChange={(event) => musicTimeChangeHandler(Number(event.target.value))}
                 />
                 <span className={styles.time}>{formatedDuration ? formatedDuration : "00:00"}</span>
 
