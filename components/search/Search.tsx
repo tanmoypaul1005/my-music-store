@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Image from '@/components/ui/SafeImage'
+import MusicItemSkeleton from '@/components/ui/skeleton/music/MusicItemSkeleton'
 import { useAppStore } from '@/store/app-store'
 import styles from './Search.module.scss'
 import itemStyles from '@/components/music/MusicItem.module.scss'
@@ -11,7 +13,7 @@ type Result = { music: Music, duration: number }
 const formatTime = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
 
 const Search = () => {
-    const [query, setQuery] = useState('')
+    const query = useSearchParams().get('q') || ''
     const [results, setResults] = useState<Result[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
@@ -38,7 +40,7 @@ const Search = () => {
             } finally {
                 if (!controller.signal.aborted) setLoading(false)
             }
-        }, 400)
+        }, 0) // already debounced by the header search box
         return () => {
             clearTimeout(timer)
             controller.abort()
@@ -51,18 +53,10 @@ const Search = () => {
     }
 
     return <div className={styles.wrapper}>
-        <input
-            className={styles.input}
-            type="search"
-            autoFocus
-            placeholder="Search songs or artists..."
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-        />
-        {loading && <p className={styles.hint}>Searching...</p>}
+        {query.trim().length < 2 && <p className={styles.hint}>Search for songs or artists from the box above.</p>}
         {error && <p className={styles.hint}>{error}</p>}
         {!loading && !error && query.trim().length >= 2 && results.length === 0 && <p className={styles.hint}>No songs found</p>}
-        <ul className={listStyles.list}>
+        {loading ? <MusicItemSkeleton /> : <ul className={listStyles.list}>
             {results.map(({ music, duration }) => (
                 <li key={music.id} className={itemStyles.item} onClick={() => play(music)}>
                     <Image
@@ -79,7 +73,7 @@ const Search = () => {
                     <span className={itemStyles.duration}>{formatTime(duration)}</span>
                 </li>
             ))}
-        </ul>
+        </ul>}
     </div>
 }
 
