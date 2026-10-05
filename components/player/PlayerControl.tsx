@@ -25,13 +25,13 @@ const PlayerControl = ({
     const cacheForOffline = () => {
         const sw = typeof navigator !== 'undefined' ? navigator.serviceWorker?.controller : null;
         if (!sw || !music) return;
-        const srcs = [music.src];
+        const srcs = music.src.startsWith('/') ? [music.src] : [];
         if (playList && playList.length > 0) {
             const currentIndex = playList.findIndex(m => m.id === music.id);
             const next = playList[currentIndex + 1 < playList.length ? currentIndex + 1 : 0];
-            if (next && next.src !== music.src) srcs.push(next.src);
+            if (next && next.src !== music.src && next.src.startsWith('/')) srcs.push(next.src);
         }
-        sw.postMessage({ type: 'CACHE_AUDIO', urls: srcs });
+        if (srcs.length) sw.postMessage({ type: 'CACHE_AUDIO', urls: srcs });
     };
 
     const changeVolumeHandler = (volumeValue: number) => {
@@ -63,6 +63,10 @@ const PlayerControl = ({
 
     useEffect(() => {
         const handler = (e: KeyboardEventInit) => {
+            // Do not hijack keys while the user is typing (e.g. in the search box)
+            const target = (e as KeyboardEvent).target as HTMLElement | null
+            if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) return
+
             const keyPressedCode: string = e.code ? e.code.toLowerCase() : ""
 
             const event = e as any;

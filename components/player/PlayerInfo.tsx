@@ -1,4 +1,5 @@
-import Image, { StaticImageData } from 'next/image'
+import { StaticImageData } from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { Dropdown } from 'antd'
 import type { MenuProps } from 'antd';
 import { useAppStore } from '@/store/app-store';

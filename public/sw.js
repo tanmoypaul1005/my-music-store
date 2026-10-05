@@ -97,6 +97,10 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
 
+  // Streamed audio from other origins (e.g. Audius) and API routes: let the browser handle them
+  if (url.origin !== self.location.origin && (request.destination === 'audio' || url.hostname.endsWith('audius.co'))) return;
+  if (url.pathname.startsWith('/api/')) return;
+
   // Audio
   if (url.origin === self.location.origin && url.pathname.startsWith('/musics/')) {
     event.respondWith(handleAudio(event).catch(() => new Response('', { status: 503 })));

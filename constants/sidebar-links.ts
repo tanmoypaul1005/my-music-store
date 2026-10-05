@@ -11,6 +11,13 @@ export const SidebarLinks : SidebarLinkInfo[] = [
                 child: false,
             },
             {
+                id: 505,
+                title: "Search",
+                href: "/search",
+                icon: "voice",
+                child: false,
+            },
+            {
                 id: 502,
                 title: "Top Songs",
                 href: "/top-song",
