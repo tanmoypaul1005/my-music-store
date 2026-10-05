@@ -3,7 +3,6 @@ import { useRef, useEffect, useState } from 'react';
 import { useAppStore } from '@/store/app-store';
 import { Dropdown, message } from 'antd';
 import useFormatSecond from '@/hooks/use-format-second';
-import useAudioPreload from '@/hooks/use-audio-preload';
 
 import Icon from '../ui/Icon';
 
@@ -21,32 +20,19 @@ const PlayerControl = ({
 
     const [messageApi, contextHolder] = message.useMessage()
 
-    // Preload current music and next music in playlist for faster loading
-    useAudioPreload(music?.src, true);
-    
-    // Preload next music in playlist
-    useEffect(() => {
-        if (music && playList && playList.length > 0) {
+    // Once the current song is buffered, ask the service worker to cache it
+    // and the next one (never competes with the song the user is waiting on)
+    const cacheForOffline = () => {
+        const sw = typeof navigator !== 'undefined' ? navigator.serviceWorker?.controller : null;
+        if (!sw || !music) return;
+        const srcs = [music.src];
+        if (playList && playList.length > 0) {
             const currentIndex = playList.findIndex(m => m.id === music.id);
-            const nextIndex = currentIndex + 1 < playList.length ? currentIndex + 1 : 0;
-            const nextMusic = playList[nextIndex];
-            
-            if (nextMusic) {
-                // Preload next audio
-                const preloadLink = document.createElement('link');
-                preloadLink.rel = 'prefetch';
-                preloadLink.as = 'audio';
-                preloadLink.href = nextMusic.src;
-                document.head.appendChild(preloadLink);
-                
-                return () => {
-                    if (document.head.contains(preloadLink)) {
-                        document.head.removeChild(preloadLink);
-                    }
-                };
-            }
+            const next = playList[currentIndex + 1 < playList.length ? currentIndex + 1 : 0];
+            if (next && next.src !== music.src) srcs.push(next.src);
         }
-    }, [music, playList]);
+        sw.postMessage({ type: 'CACHE_AUDIO', urls: srcs });
+    };
 
     const changeVolumeHandler = (volumeValue: number) => {
         ref.current.volume = volumeValue
@@ -265,10 +251,9 @@ const PlayerControl = ({
                     ref={ref} 
                     onTimeUpdate={musicTimeUpdateHandler} 
                     onLoadedMetadata={metadataLoadHandler}
-                    preload="metadata"
-                    crossOrigin="anonymous"
+                    preload="auto"
+                    onCanPlayThrough={cacheForOffline}
                 >
-                    <source src={music.src} type="audio/mpeg" />
                     Your browser does not support the audio element.
                 </audio>
             }

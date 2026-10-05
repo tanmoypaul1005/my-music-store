@@ -69,12 +69,28 @@ const handleAudio = async (event) => {
   const cached = await cache.match(key);
   if (cached) return rangeFromCache(request, cached);
 
-  // Not cached yet: stream from network, and store the full file in the background
-  event.waitUntil(
-    fetch(key).then((res) => (res.ok ? cache.put(key, res) : null)).catch(() => {})
-  );
+  // Not cached yet: go straight to the network so first play is never slowed down.
+  // The page asks us to cache it (CACHE_AUDIO) once it is buffered.
   return fetch(request);
 };
+
+// Cache songs on request from the page (after playback is already buffered)
+self.addEventListener('message', (event) => {
+  const data = event.data;
+  if (!data || data.type !== 'CACHE_AUDIO' || !Array.isArray(data.urls)) return;
+  event.waitUntil(
+    caches.open(AUDIO_CACHE).then(async (cache) => {
+      for (const u of data.urls) {
+        const key = new Request(u, { credentials: 'same-origin' });
+        if (await cache.match(key)) continue;
+        try {
+          const res = await fetch(key);
+          if (res.ok) await cache.put(key, res);
+        } catch (e) {}
+      }
+    })
+  );
+});
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
