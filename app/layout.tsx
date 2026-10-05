@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 import ThemeProvider from '@/components/theme/Theme'
@@ -9,7 +9,13 @@ import Player from '@/components/player/Player'
 import AppInitializer from '@/components/AppInitializer'
 import { Analytics } from "@vercel/analytics/next"
 
+export const viewport: Viewport = {
+  themeColor: '#0f0f14',
+}
+
 export const metadata : Metadata = {
+  manifest: '/manifest.webmanifest',
+  appleWebApp: { capable: true, title: 'Music Player', statusBarStyle: 'black-translucent' },
   title: {
     default: `${process.env.NEXT_PUBLIC_TITLE} | Ali_God`,
     template: `${process.env.NEXT_PUBLIC_TITLE} | %s | Ali_God`

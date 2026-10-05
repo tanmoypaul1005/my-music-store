@@ -1,6 +1,7 @@
 "use client"
 import { message } from 'antd';
 import ThemeToggler from '../theme/ThemeToggler';
+import InstallButton from '../pwa/InstallButton';
 import styles from './Header.module.scss'
 
 const Header = () => {
@@ -18,6 +19,7 @@ const Header = () => {
             <span className={styles.hamburger}></span>
         </button>
         <div className={styles.box}>
+            <InstallButton />
             <ThemeToggler />
         </div>
         {contextHolder}
