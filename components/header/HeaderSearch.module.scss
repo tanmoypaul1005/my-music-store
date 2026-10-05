@@ -1,0 +1,83 @@
+.form {
+    position: relative;
+    flex: 1;
+    max-width: 420px;
+    min-width: 0;
+    margin: 0 auto 0 0;
+}
+
+.searchIcon {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: var(--sub-text-color);
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.input {
+    width: 100%;
+    height: 46px;
+    padding: 0 44px 0 46px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--title-color);
+    background-color: var(--card-background-2);
+    border: 2px solid transparent;
+    border-radius: 500px;
+    outline: none;
+    transition: var(--transition);
+
+    &::placeholder {
+        color: var(--sub-text-color);
+    }
+
+    &:hover {
+        border-color: var(--border-color);
+    }
+
+    &:focus {
+        border-color: var(--title-color);
+    }
+
+    &:focus ~ .searchIcon,
+    &:focus + .searchIcon {
+        color: var(--title-color);
+    }
+}
+
+.form:focus-within .searchIcon {
+    color: var(--title-color);
+}
+
+.clear {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: var(--sub-text-color);
+    cursor: pointer;
+
+    &:hover {
+        color: var(--title-color);
+    }
+}
+
+@media (max-width: 768px) {
+    .form {
+        max-width: none;
+    }
+
+    .input {
+        height: 40px;
+        font-size: 14px;
+    }
+}

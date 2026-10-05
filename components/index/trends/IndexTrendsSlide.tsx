@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import useNumber from '@/hooks/use-number'
 import MainButton from '@/components/ui/button/MainButton'
 

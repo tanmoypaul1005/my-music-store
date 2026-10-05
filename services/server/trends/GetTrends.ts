@@ -1,7 +1,8 @@
-const GetTrends = async () => {
-    const res = await fetch(process.env.NEXT_PUBLIC_TRENDS_API)
+import fetchWithFallback from "../fetchWithFallback"
 
-    const data : Music[] = await res.json()
+const GetTrends = async () => {
+    const data : Music[] = await fetchWithFallback<Music[]>(process.env.NEXT_PUBLIC_TRENDS_API, 'trends')
+
 
     return data;
 }

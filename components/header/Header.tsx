@@ -1,6 +1,9 @@
 "use client"
+import { Suspense } from 'react';
 import { message } from 'antd';
+import HeaderSearch from './HeaderSearch';
 import ThemeToggler from '../theme/ThemeToggler';
+import InstallButton from '../pwa/InstallButton';
 import styles from './Header.module.scss'
 
 const Header = () => {
@@ -17,7 +20,11 @@ const Header = () => {
             <span className={styles.hamburger}></span>
             <span className={styles.hamburger}></span>
         </button>
+        <Suspense fallback={null}>
+            <HeaderSearch />
+        </Suspense>
         <div className={styles.box}>
+            <InstallButton />
             <ThemeToggler />
         </div>
         {contextHolder}

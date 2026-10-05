@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/ui/SafeImage'
 import { useAppStore } from "@/store/app-store";
 import useAudioDuration from "@/hooks/use-audio-duration";
 import Icon from "@/components/ui/Icon";

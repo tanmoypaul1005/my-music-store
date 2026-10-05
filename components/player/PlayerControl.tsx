@@ -3,7 +3,6 @@ import { useRef, useEffect, useState } from 'react';
 import { useAppStore } from '@/store/app-store';
 import { Dropdown, message } from 'antd';
 import useFormatSecond from '@/hooks/use-format-second';
-import useAudioPreload from '@/hooks/use-audio-preload';
 
 import Icon from '../ui/Icon';
 
@@ -21,32 +20,19 @@ const PlayerControl = ({
 
     const [messageApi, contextHolder] = message.useMessage()
 
-    // Preload current music and next music in playlist for faster loading
-    useAudioPreload(music?.src, true);
-    
-    // Preload next music in playlist
-    useEffect(() => {
-        if (music && playList && playList.length > 0) {
+    // Once the current song is buffered, ask the service worker to cache it
+    // and the next one (never competes with the song the user is waiting on)
+    const cacheForOffline = () => {
+        const sw = typeof navigator !== 'undefined' ? navigator.serviceWorker?.controller : null;
+        if (!sw || !music) return;
+        const srcs = music.src.startsWith('/') ? [music.src] : [];
+        if (playList && playList.length > 0) {
             const currentIndex = playList.findIndex(m => m.id === music.id);
-            const nextIndex = currentIndex + 1 < playList.length ? currentIndex + 1 : 0;
-            const nextMusic = playList[nextIndex];
-            
-            if (nextMusic) {
-                // Preload next audio
-                const preloadLink = document.createElement('link');
-                preloadLink.rel = 'prefetch';
-                preloadLink.as = 'audio';
-                preloadLink.href = nextMusic.src;
-                document.head.appendChild(preloadLink);
-                
-                return () => {
-                    if (document.head.contains(preloadLink)) {
-                        document.head.removeChild(preloadLink);
-                    }
-                };
-            }
+            const next = playList[currentIndex + 1 < playList.length ? currentIndex + 1 : 0];
+            if (next && next.src !== music.src && next.src.startsWith('/')) srcs.push(next.src);
         }
-    }, [music, playList]);
+        if (srcs.length) sw.postMessage({ type: 'CACHE_AUDIO', urls: srcs });
+    };
 
     const changeVolumeHandler = (volumeValue: number) => {
         ref.current.volume = volumeValue
@@ -77,6 +63,10 @@ const PlayerControl = ({
 
     useEffect(() => {
         const handler = (e: KeyboardEventInit) => {
+            // Do not hijack keys while the user is typing (e.g. in the search box)
+            const target = (e as KeyboardEvent).target as HTMLElement | null
+            if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) return
+
             const keyPressedCode: string = e.code ? e.code.toLowerCase() : ""
 
             const event = e as any;
@@ -265,10 +255,9 @@ const PlayerControl = ({
                     ref={ref} 
                     onTimeUpdate={musicTimeUpdateHandler} 
                     onLoadedMetadata={metadataLoadHandler}
-                    preload="metadata"
-                    crossOrigin="anonymous"
+                    preload="auto"
+                    onCanPlayThrough={cacheForOffline}
                 >
-                    <source src={music.src} type="audio/mpeg" />
                     Your browser does not support the audio element.
                 </audio>
             }

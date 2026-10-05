@@ -1,5 +1,5 @@
 "use client"
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import useAudioDuration from '@/hooks/use-audio-duration'
 import styles from './MusicItem.module.scss'
 
