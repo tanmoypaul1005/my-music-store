@@ -1,6 +1,6 @@
 import db from '@/server/db.json'
 
-type DbKey = 'musics' | 'artists' | 'trends' | 'top-artists' | 'top-musics'
+type DbKey = 'musics' | 'artists' | 'trends'
 
 /**
  * Fetch JSON from the remote API; if it is down or returns a non-JSON/error
