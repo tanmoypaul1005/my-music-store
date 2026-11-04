@@ -14,6 +14,7 @@ export type HomeSections = {
   popularBangla: Music[];
   hindi: Music[];
   top: Music[];
+  extra: { key: string; title: string; musics: Music[] }[];
 };
 
 const BanglaSongList = ({ sections }: { sections: HomeSections }) => {
@@ -162,6 +163,46 @@ const BanglaSongList = ({ sections }: { sections: HomeSections }) => {
           ))}
         </Swiper>
       </div>
+
+      {sections.extra.filter(s => s.musics.length > 0).map(section => (
+        <div key={section.key}>
+          <div
+            className={styles.title}
+            style={{
+              marginBottom: "20px",
+              marginTop: "40px",
+              flex: 1,
+              display: "flex",
+              fontSize: "22px",
+              fontWeight: "800",
+            }}>{section.title}</div>
+
+          <div className={styles.sliderContainer}>
+            <Swiper
+              modules={[Navigation, Mousewheel]}
+              spaceBetween={20}
+              slidesPerView="auto"
+              navigation
+              mousewheel={{ forceToAxis: true }}
+              className={styles.cardSwiper}
+            >
+              {section.musics.map((music, index) => (
+                <SwiperSlide key={music.id} className={styles.slide}>
+                  <BanglaSongCard
+                    musicData={music}
+                    index={index + 1}
+                    onMusicClick={() => {
+                      setMusic(music);
+                      const id = `${section.key}-home-playlist`;
+                      if (playlistId !== id) setPlayList(id, section.musics);
+                    }}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      ))}
 
     </div>
   );
