@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['i.imgur.com', 'i.scdn.co',"i.ytimg.com","encrypted-tbn0.gstatic.com"],
+    domains: ['i.imgur.com', 'i.scdn.co',"i.ytimg.com","encrypted-tbn0.gstatic.com","res.cloudinary.com"],
     unoptimized: true,
   },
   reactStrictMode: false,

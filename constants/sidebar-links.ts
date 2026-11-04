@@ -59,6 +59,13 @@ export const SidebarLinks : SidebarLinkInfo[] = [
                 child: true,
             },
             {
+                id: 509,
+                title: "Uploads",
+                href: "/uploads",
+                icon: "music-note-fill",
+                child: true,
+            },
+            {
                 id: 508,
                 title: "Video Songs",
                 href: "/video",
