@@ -22,7 +22,7 @@ const IndexTrends = ({
         {
             "id": 119,
             "name": "Bulbuli",
-            "src": "/musics/bangla/bulbuli.mp3",
+            "src": "https://res.cloudinary.com/zjjfwx1w/video/upload/v1793771392/my-music-store/library/songs/bulbuli.webm",
             "artist": "Ritu Raj & Nandita",
             "coverImage": "/images/music/bulbuili.png",
             "avatar": "/images/music/without-me.webp",
@@ -31,7 +31,7 @@ const IndexTrends = ({
         {
             "id": 120,
             "name": "LEVEL FIVE - TUMI",
-            "src": "/musics/bangla/LEVEL FIVE - TUMI.mp3",
+            "src": "https://res.cloudinary.com/zjjfwx1w/video/upload/v1793771368/my-music-store/library/songs/LEVEL-FIVE---TUMI.mp3",
             "artist": "Jayati Chakraborty",
             "coverImage": "https://i.ytimg.com/vi/NQp3cbSkqbo/hqdefault.jpg",
             "avatar": "/images/music/without-me.webp",
