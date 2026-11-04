@@ -1,22 +1,18 @@
-import styles from "@/components/music/MusicList.module.scss";
+import MusicList from "@/components/music/MusicList";
+import musicList from "@/server/topSong.json";
+import { GetSectionMusics } from "@/services/server/cloudinary";
+
 import type { Metadata } from 'next'
-import TopSong from "./components/TopSong";
  
 export const metadata: Metadata = {
   title: 'Top Song',
   description: 'Top Song',
 }
 
-const MusicsPage = () => {
+const MusicsPage = async () => {
+  const musics = await GetSectionMusics("top", musicList.music);
 
-  return (
-    <>
-      <h3 className={styles.title}>Top song</h3>
-      <ul className={styles.list}>
-        <TopSong />
-      </ul>
-    </>
-  );
+  return <MusicList name="Top song" musics={musics} playListId="top-song-playlist" />;
 };
 
 export default MusicsPage;

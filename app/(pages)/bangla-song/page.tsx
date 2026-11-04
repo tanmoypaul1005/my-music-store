@@ -1,5 +1,6 @@
-import styles from "@/components/music/MusicList.module.scss";
-import BanglaSong from "./components/BanglaSong";
+import MusicList from "@/components/music/MusicList";
+import musicList from "@/server/banglaSong.json";
+import { GetSectionMusics } from "@/services/server/cloudinary";
 
 import type { Metadata } from 'next'
  
@@ -8,16 +9,10 @@ export const metadata: Metadata = {
   description: 'Bangla song',
 }
 
-const MusicsPage = () => {
+const MusicsPage = async () => {
+  const musics = await GetSectionMusics("bangla", musicList.music);
 
-  return (
-    <>
-      <h3 className={styles.title}>Top bangla song</h3>
-      <ul className={styles.list}>
-        <BanglaSong />
-      </ul>
-    </>
-  );
+  return <MusicList name="Top bangla song" musics={musics} playListId="bangla-song-playlist" />;
 };
 
 export default MusicsPage;

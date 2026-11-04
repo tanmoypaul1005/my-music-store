@@ -1,41 +1,11 @@
-"use client";
-import MusicItem from "@/components/music/MusicItem";
+import MusicList from "@/components/music/MusicList";
 import musicList from "@/server/hindiSong.json";
-import { useAppStore } from "@/store/app-store";
-import styles from "@/components/music/MusicList.module.scss";
+import { GetSectionMusics } from "@/services/server/cloudinary";
 
-const MusicsPage = () => {
+const MusicsPage = async () => {
+  const musics = await GetSectionMusics("hindi", musicList.music);
 
-  const PLAY_LIST_ID = "top-charts-musics-playlist";
-
-  const [setMusic, setPlaylist, id] = useAppStore((state) => [
-    state.setMusic,
-    state.setPlaylist,
-    state.playListId,
-  ]);
-
-  const musicClickHandler = (music: Music) => {
-    setMusic(music);
-    if (id !== PLAY_LIST_ID) {
-      setPlaylist(PLAY_LIST_ID, musicList?.music);
-    }
-  };
-
-
-  return (
-    <>
-      <h3 className={styles.title}>Top hindi song</h3>
-      <ul className={styles.list}>
-        {musicList?.music?.map((music) => (
-          <MusicItem
-            key={music.id}
-            musicData={music}
-            onMusicClick={musicClickHandler}
-          />
-        ))}
-      </ul>
-    </>
-  );
+  return <MusicList name="Top hindi song" musics={musics} playListId="hindi-song-playlist" />;
 };
 
 export default MusicsPage;

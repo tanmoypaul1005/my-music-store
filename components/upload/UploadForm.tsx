@@ -2,6 +2,7 @@
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
+import { SECTIONS } from '@/services/sections'
 import styles from './UploadForm.module.scss'
 
 const MAX_AUDIO_MB = 50
@@ -47,6 +48,7 @@ const UploadForm = () => {
     const setDisableKeyDown = useAppStore(state => state.setDisableKeyDown)
     const [title, setTitle] = useState('')
     const [artist, setArtist] = useState('')
+    const [section, setSection] = useState('')
     const [password, setPassword] = useState('')
     const [audio, setAudio] = useState<File | null>(null)
     const [cover, setCover] = useState<File | null>(null)
@@ -81,7 +83,7 @@ const UploadForm = () => {
                 coverUrl = (await uploadToCloudinary(cover, await getSignature({ password, kind: 'cover' }), 'image')).secure_url
             }
             setMessage('Uploading song...')
-            const signed = await getSignature({ password, kind: 'audio', title, artist, cover: coverUrl })
+            const signed = await getSignature({ password, kind: 'audio', title, artist, cover: coverUrl, section })
             await uploadToCloudinary(audio!, signed, 'video', setProgress)
             await fetch('/api/upload/complete', { method: 'POST' })
 
@@ -106,6 +108,10 @@ const UploadForm = () => {
         <div className={styles.row}>
             <input className={styles.input} placeholder="Song title" value={title} onChange={e => setTitle(e.target.value)} maxLength={120} required {...inputProps} />
             <input className={styles.input} placeholder="Artist" value={artist} onChange={e => setArtist(e.target.value)} maxLength={120} required {...inputProps} />
+            <select className={styles.input} value={section} onChange={e => setSection(e.target.value)} disabled={uploading}>
+                <option value="">Section: Uploads only</option>
+                {Object.entries(SECTIONS).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
+            </select>
         </div>
         <div className={styles.row}>
             <label className={styles.file}>

@@ -1,21 +1,25 @@
 "use client";
 import { useAppStore } from "@/store/app-store";
-import banglaMusics from "@/server/banglaSong.json";
-import populerBanglaSong from "@/server/populerBanglaSong.json";
-import hindiSong from "@/server/hindiSong.json";
 import BanglaSongCard from "./BanglaSongCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from "./banglaSong.module.scss";
-import topSong from "@/server/topSong.json";
 import PopularArtists from "../index/popular-artists/PopularArtists";
 
-const BanglaSongList = () => {
+// Each list already includes songs uploaded to that section
+export type HomeSections = {
+  bangla: Music[];
+  popularBangla: Music[];
+  hindi: Music[];
+  top: Music[];
+};
 
-  const musics = banglaMusics?.music;
-  const populermusics = populerBanglaSong?.music;
+const BanglaSongList = ({ sections }: { sections: HomeSections }) => {
+
+  const musics = sections.bangla;
+  const populermusics = sections.popularBangla;
 
   const PLAY_LIST_ID = "top-charts-musics-playlist";
 
@@ -115,7 +119,7 @@ const BanglaSongList = () => {
           mousewheel={{ forceToAxis: true }}
           className={styles.cardSwiper}
         >
-          {hindiSong?.music?.map((music, index) => (
+          {sections.hindi.map((music, index) => (
             <SwiperSlide key={music.id} className={styles.slide}>
               <BanglaSongCard
                 musicData={music}
@@ -147,7 +151,7 @@ const BanglaSongList = () => {
           mousewheel={{ forceToAxis: true }}
           className={styles.cardSwiper}
         >
-          {topSong?.music?.map((music, index) => (
+          {sections.top.map((music, index) => (
             <SwiperSlide key={music.id} className={styles.slide}>
               <BanglaSongCard
                 musicData={music}

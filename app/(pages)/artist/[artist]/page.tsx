@@ -4,6 +4,7 @@ import populerBanglaSong from "@/server/populerBanglaSong.json";
 import hindiSong from "@/server/hindiSong.json";
 import topSong from "@/server/topSong.json";
 import ArtistDetail from "@/components/artist-detail/ArtistDetail";
+import GetUploadedMusics from "@/services/server/cloudinary";
 
 type Props = {
   params: { artist: string };
@@ -23,7 +24,8 @@ export default async function ArtistDetailPage({ params }: Props) {
   
   // Merge all songs from all sources
   const allSongs = [
-    ...banglaSong.music, 
+    ...(await GetUploadedMusics()),
+    ...banglaSong.music,
     ...populerBanglaSong.music,
     ...hindiSong.music,
     ...topSong.music

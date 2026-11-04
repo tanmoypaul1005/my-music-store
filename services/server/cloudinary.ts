@@ -1,4 +1,5 @@
 import { createHash } from 'crypto'
+import { Section } from '@/services/sections'
 
 export const SONGS_FOLDER = 'my-music-store/songs'
 export const COVERS_FOLDER = 'my-music-store/covers'
@@ -20,14 +21,14 @@ const clean = (value: string) => value.replace(/[|=\\]/g, ' ').trim().slice(0, 1
  * without ever seeing the API secret.
  * https://cloudinary.com/documentation/authentication_signatures
  */
-export const signUpload = (folder: string, meta?: { title: string, artist: string, cover?: string }) => {
+export const signUpload = (folder: string, meta?: { title: string, artist: string, cover?: string, section?: Section }) => {
     const { cloudName, apiKey, apiSecret } = config()
     const params: Record<string, string> = {
         folder,
         timestamp: String(Math.round(Date.now() / 1000)),
     }
     if (meta) {
-        params.context = [`title=${clean(meta.title)}`, `artist=${clean(meta.artist)}`, meta.cover && `cover=${meta.cover}`]
+        params.context = [`title=${clean(meta.title)}`, `artist=${clean(meta.artist)}`, meta.cover && `cover=${meta.cover}`, meta.section && `section=${meta.section}`]
             .filter(Boolean)
             .join('|')
     }
@@ -69,6 +70,7 @@ const GetUploadedMusics = async (): Promise<Music[]> => {
                 avatar: cover,
                 artist: ctx.artist || 'Unknown',
                 playedCount: 0,
+                section: ctx.section,
             }
         })
     } catch (e) {
@@ -76,5 +78,12 @@ const GetUploadedMusics = async (): Promise<Music[]> => {
         return []
     }
 }
+
+// Uploaded songs of a section first, then the section's bundled JSON songs
+export const withUploads = (section: Section, musics: Music[], uploads: Music[]) =>
+    [...uploads.filter(m => m.section === section), ...musics]
+
+export const GetSectionMusics = async (section: Section, musics: Music[]) =>
+    withUploads(section, musics, await GetUploadedMusics())
 
 export default GetUploadedMusics
