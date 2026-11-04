@@ -1,5 +1,4 @@
 import MusicList from "@/components/music/MusicList";
-import musicList from "@/server/topSong.json";
 import { GetSectionMusics } from "@/services/server/cloudinary";
 
 import type { Metadata } from 'next'
@@ -10,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const MusicsPage = async () => {
-  const musics = await GetSectionMusics("top", musicList.music);
+  const musics = await GetSectionMusics("top");
 
   return <MusicList name="Top song" musics={musics} playListId="top-song-playlist" />;
 };

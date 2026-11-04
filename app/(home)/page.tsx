@@ -1,20 +1,16 @@
 import GetTrends from "@/services/server/trends/GetTrends"
-import GetUploadedMusics, { withUploads } from "@/services/server/cloudinary"
-import banglaSong from "@/server/banglaSong.json"
-import populerBanglaSong from "@/server/populerBanglaSong.json"
-import hindiSong from "@/server/hindiSong.json"
-import topSong from "@/server/topSong.json"
+import { GetSongs, pickSection } from "@/services/server/cloudinary"
 
 import Index from "@/components/index/Index"
 
 const HomePage = async () => {
-    const [trends, uploads] = await Promise.all([GetTrends(), GetUploadedMusics()])
+    const [trends, songs] = await Promise.all([GetTrends(), GetSongs()])
 
     const sections = {
-        bangla: withUploads("bangla", banglaSong.music, uploads),
-        popularBangla: withUploads("popular-bangla", populerBanglaSong.music, uploads),
-        hindi: withUploads("hindi", hindiSong.music, uploads),
-        top: withUploads("top", topSong.music, uploads),
+        bangla: pickSection(songs, "bangla"),
+        popularBangla: pickSection(songs, "popular-bangla"),
+        hindi: pickSection(songs, "hindi"),
+        top: pickSection(songs, "top"),
     }
 
     return <Index trends={trends} sections={sections} />

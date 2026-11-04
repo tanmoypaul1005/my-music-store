@@ -20,7 +20,7 @@ A modern Next.js 16 music player application with TypeScript, SCSS modules, and 
 - `store/` - Zustand stores (app-store.ts, theme-store.ts)
 - `services/server/` - Data fetching functions from local JSON
 - `public/musics/` - Static audio files (bangla/, hindi/, topSong/, trends/)
-- `server/` - JSON data files (banglaSong.json, hindiSong.json, etc.)
+- `server/` - JSON data files (artistList.json, db.json fallback)
 - `styles/partials/` - SCSS variables, mixins, themes
 
 ### State Management with Zustand
@@ -55,10 +55,10 @@ interface Music {
 }
 ```
 
-**Data Source**: All music data lives in JSON files under `server/`:
-- `banglaSong.json`, `hindiSong.json`, `topSong.json`
-- Files contain arrays with base64-encoded images (large payloads)
-- No external API - everything is bundled with the app
+**Data Source**: Section songs (Bangla, Popular Bangla, Hindi, Top, uploads) all live in Cloudinary (`services/server/cloudinary.ts`):
+- Audio + cover files are Cloudinary assets under `my-music-store/`
+- Song info is the asset context: `title`, `artist`, `cover`, `id`, `plays`, `sections` (e.g. `bangla:0,popular-bangla:3`; no position = newly uploaded, shown first)
+- New songs are added from the `/uploads` page; sections are defined in `services/sections.ts`
 
 ### Styling Conventions
 

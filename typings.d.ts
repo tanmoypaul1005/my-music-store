@@ -6,7 +6,7 @@ interface Music {
     avatar: string,
     artist: string,
     playedCount: number
-    section?: string
+
 }
 
 interface Artist {

@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import banglaSong from "@/server/banglaSong.json";
-import populerBanglaSong from "@/server/populerBanglaSong.json";
-import hindiSong from "@/server/hindiSong.json";
-import topSong from "@/server/topSong.json";
 import ArtistDetail from "@/components/artist-detail/ArtistDetail";
-import GetUploadedMusics from "@/services/server/cloudinary";
+import { GetAllMusics } from "@/services/server/cloudinary";
 
 type Props = {
   params: { artist: string };
@@ -22,14 +18,7 @@ export default async function ArtistDetailPage({ params }: Props) {
   const resolvedParams = await params;
   const artistName = decodeURIComponent(resolvedParams.artist);
   
-  // Merge all songs from all sources
-  const allSongs = [
-    ...(await GetUploadedMusics()),
-    ...banglaSong.music,
-    ...populerBanglaSong.music,
-    ...hindiSong.music,
-    ...topSong.music
-  ];
+  const allSongs = await GetAllMusics();
   
   // Filter songs by artist name (case insensitive and trim whitespace)
   const artistSongs = allSongs?.filter(

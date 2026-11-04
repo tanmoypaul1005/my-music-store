@@ -5,16 +5,11 @@ import { Mousewheel, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import styles from "./PopularArtists.module.scss";
-import banglaSong from "@/server/banglaSong.json";
-import populerBanglaSong from "@/server/populerBanglaSong.json";
 import artistList from "@/server/artistList.json";
 
 
-export default function PopularArtists({  }) {
-  
-  // Merge all songs together
-  const allSongs = [...banglaSong?.music, ...populerBanglaSong?.music];
-  
+export default function PopularArtists({ songs: allSongs }: { songs: Music[] }) {
+
   // Extract unique artists with song count
   const artistMap = new Map<string, { name: string; avatar: string; songCount: number }>();
   

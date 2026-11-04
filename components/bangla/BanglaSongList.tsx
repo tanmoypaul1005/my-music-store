@@ -97,7 +97,7 @@ const BanglaSongList = ({ sections }: { sections: HomeSections }) => {
         </Swiper>
       </div>
 
-      <PopularArtists />
+      <PopularArtists songs={[...musics, ...populermusics]} />
 
       <div
         className={styles.title}
