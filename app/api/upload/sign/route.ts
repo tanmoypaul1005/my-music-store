@@ -1,14 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { timingSafeEqual } from 'crypto'
 import { COVERS_FOLDER, SONGS_FOLDER, signUpload } from '@/services/server/cloudinary'
 import { isSection } from '@/services/sections'
-
-const isAllowed = (password: string) => {
-    const secret = process.env.UPLOAD_PASSWORD || ''
-    const a = Buffer.from(password)
-    const b = Buffer.from(secret)
-    return secret.length > 0 && a.length === b.length && timingSafeEqual(a, b)
-}
+import { isAllowed } from '@/services/server/auth'
 
 export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({}))

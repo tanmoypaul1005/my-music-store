@@ -129,5 +129,66 @@ const GetUploadedMusics = async () => (await GetSongs())
     .sort((a, b) => b.createdAt - a.createdAt)
     .map(toMusic)
 
+export type EditableSong = { publicId: string, title: string, artist: string, cover: string, sections: string }
+
+// Uploaded songs with the raw fields the edit panel needs, newest first
+export const GetEditableSongs = async (): Promise<EditableSong[]> => {
+    try {
+        const { cloudName, apiKey, apiSecret } = config()
+        const res = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload?prefix=${encodeURIComponent(SONGS_FOLDER + '/')}&context=true&max_results=500`,
+            { headers: { Authorization: `Basic ${Buffer.from(`${apiKey}:${apiSecret}`).toString('base64')}` }, cache: 'no-store' }
+        )
+        if (!res.ok) throw new Error(`Cloudinary ${res.status}`)
+        const json = await res.json()
+        return (json.resources || [])
+            .sort((a: any, b: any) => Date.parse(b.created_at) - Date.parse(a.created_at))
+            .map((r: any) => {
+                const ctx = r.context?.custom || {}
+                return {
+                    publicId: r.public_id,
+                    title: ctx.title || r.public_id.split('/').pop(),
+                    artist: ctx.artist || '',
+                    cover: ctx.cover || FALLBACK_COVER,
+                    sections: ctx.sections || '',
+                }
+            })
+    } catch (e) {
+        console.error('GetEditableSongs:', (e as Error).message)
+        return []
+    }
+}
+
+/**
+ * Update an uploaded song's title/artist/section. Cloudinary replaces the whole context
+ * on update, so the current context is read first and only the changed keys are swapped.
+ * section: undefined = keep as is, '' = Uploads only, otherwise the new section.
+ */
+export const UpdateSong = async (publicId: string, changes: { title: string, artist: string, cover?: string, section?: Section | '' }) => {
+    const { cloudName, apiKey, apiSecret } = config()
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/video/upload/${publicId}`
+    const headers = { Authorization: `Basic ${Buffer.from(`${apiKey}:${apiSecret}`).toString('base64')}` }
+
+    const current = await fetch(url, { headers, cache: 'no-store' })
+    if (!current.ok) throw new Error(current.status === 404 ? 'Song not found' : `Cloudinary ${current.status}`)
+    const ctx: Record<string, string> = { ...((await current.json()).context?.custom || {}) }
+
+    ctx.title = clean(changes.title)
+    ctx.artist = clean(changes.artist)
+    if (changes.cover) ctx.cover = changes.cover
+    if (changes.section !== undefined) {
+        if (changes.section) ctx.sections = changes.section
+        else delete ctx.sections
+    }
+
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { ...headers, 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ context: Object.entries(ctx).map(([k, v]) => `${k}=${v}`).join('|') }),
+        cache: 'no-store',
+    })
+    if (!res.ok) throw new Error(`Cloudinary ${res.status}`)
+}
+
 export { GetSongs }
 export default GetUploadedMusics
